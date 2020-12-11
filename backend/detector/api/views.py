@@ -2,8 +2,10 @@ from rest_framework.generics import ListAPIView
 from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.db.models import Min, Max
 
 import datetime as dt
+from cacheops import cached_as
 
 from .service import ListViewSet, slice_data_by_timestamp, queryset_mean
 from detector.models import Detector, DetectorData
@@ -32,14 +34,22 @@ class DetectorListView(ListViewSet):
         detector = self.get_object()
         data = DetectorData.objects.filter(detector=detector)
         begin_date, end_date, currency = self.get_query_params_date()
-        if kwargs.get('every', None):
+        if request.query_params.get('every', None):
+
+            @cached_as(DetectorData, extra=self.get_query_params_date()[:2])
+            def _get_data(detector=detector, begin_date=begin_date, end_date=end_date):
+                return DetectorData.objects.filter(
+                    detector=detector, 
+                    timestamp__gte=begin_date, 
+                    timestamp__lte=end_date
+                ).exclude(humidity=None, lightning=None, pH=None) \
+                    .annotate(min_timestamp=Min('timestamp')) \
+                    .annotate(max_timestamp=Max('timestamp')) \
+                    .order_by('timestamp')
+            
+            data = _get_data()
+        else:
             sliced_data = slice_data_by_timestamp(data, begin_date, end_date, currency)
             data = queryset_mean(sliced_data, detector, begin_date, end_date, currency)
-        else:
-            data = DetectorData.objects.filter(
-                timestamp__gte=begin_date,
-                timestamp__lte=end_date,
-            )
         serializer = self.get_serializer(data, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
-        # return Reponse(status=status.HTTP_200_OK)

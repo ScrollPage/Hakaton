@@ -32,10 +32,11 @@ def slice_data_by_timestamp(queryset, begin_time, end_time, currency):
         i += 1
         res.append(date_sliced_queryset)
     date_sliced_queryset = queryset.filter(
-        timestamp__gte=begin_time+currency*i,
-        timestamp__lte=end_time,
+        timestamp__gte=begin_time+currency*i, 
+        timestamp__lte=end_time
     )
-    res.append(date_sliced_queryset)
+    if date_sliced_queryset:
+        res.append(date_sliced_queryset)
 
     return res
 
@@ -47,7 +48,7 @@ def queryset_mean(queryset, *args):
 
         @cached_as(queryset, extra=list(*args))
         def _get_aggregation(queryset=queryset):
-            return queryset \
+            return queryset.exclude(humidity=None, lightning=None, pH=None) \
                 .aggregate(
                     mean_first_temp=Avg('temp'),
                     mean_humidity=Avg('humidity'),
@@ -65,7 +66,8 @@ def queryset_mean(queryset, *args):
             lightning = aggregated_data['mean_lightning'],
             pH = aggregated_data['mean_pH'],
             min_timestamp = aggregated_data['min_timestamp'],
-            max_timestamp = aggregated_data['max_timestamp']
+            max_timestamp = aggregated_data['max_timestamp'],
+            timestamp = None
         )
     
     return list(map(map_slicing_func, queryset))

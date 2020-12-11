@@ -11,8 +11,8 @@ class DetectorSerializer(serializers.ModelSerializer):
 
 class DetectorDataSerializer(serializers.ModelSerializer):
     '''Сериализация данных датчика'''
-    min_timestamp = serializers.DateField()
-    max_timestamp = serializers.DateField()
+    min_timestamp = serializers.DateTimeField()
+    max_timestamp = serializers.DateTimeField()
 
     class Meta:
         model = DetectorData
