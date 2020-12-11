@@ -11,7 +11,17 @@ class DetectorSerializer(serializers.ModelSerializer):
 
 class DetectorDataSerializer(serializers.ModelSerializer):
     '''Сериализация данных датчика'''
+    min_timestamp = serializers.DateField()
+    max_timestamp = serializers.DateField()
 
     class Meta:
         model = DetectorData
-        fields = '__all__'
+        fields = [
+            'min_timestamp', 
+            'max_timestamp', 
+            'timestamp',
+            'pH', 
+            'humidity', 
+            'lightning', 
+            'temp'
+        ]
