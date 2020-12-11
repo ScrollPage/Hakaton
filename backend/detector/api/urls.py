@@ -1,7 +1,11 @@
 from django.urls import path
+from rest_framework.routers import DefaultRouter
 
 from .views import DetectorListView
 
 urlpatterns = [
-    path('detector/', DetectorListView.as_view(), name='detector-list')
+    
 ]
+
+r = DefaultRouter()
+r.register('detector', DetectorListView,  basename='detector')

@@ -1,5 +1,5 @@
 from django.db import models
-# from django.contrib.postgres.indexes import BrinIndex
+from django.contrib.postgres.indexes import BrinIndex
 
 from random import uniform
 from datetime import datetime, timedelta
@@ -33,4 +33,4 @@ class DetectorData(models.Model):
     class Meta:
         verbose_name = 'Данные датчика'
         verbose_name_plural = 'Данные датчиков'
-        # indexes = [BrinIndex(fields=['timestamp'])]
+        indexes = [BrinIndex(fields=['timestamp'])]
