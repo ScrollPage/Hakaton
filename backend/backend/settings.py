@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'cacheops',
+    'corsheaders',
+    'djoser',
+    'rest_auth',
+    'rest_framework',
+
+    'client',
+    'detector',
 ]
 
 MIDDLEWARE = [
@@ -73,13 +84,23 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.postgresql'),
+        'NAME': os.environ.get('SQL_DATABASE', 'hakatondb'),
+        'USER': os.environ.get('SQL_USER', 'postgres'),
+        'PASSWORD': os.environ.get('SQL_PASSWORD', 'pass'),
+        'HOST': os.environ.get('SQL_HOST', '127.0.0.1'),
+        'PORT': os.environ.get('SQL_PORT', '5432'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -113,8 +134,73 @@ USE_L10N = True
 
 USE_TZ = True
 
+# User model
+AUTH_USER_MODEL = 'client.Client'
+
+# CORS
+CORS_ORIGIN_WHITELIST = (
+    u'http://127.0.0.1:3000',
+    u'http://localhost:3000'
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#JWT Authentication
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUDIENCE': None,
+    'ISSUER': None,
+
+    'AUTH_HEADER_TYPES': ('Token',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+
+    'JTI_CLAIM': 'jti',
+
+    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
+
+# #REDIS related settings
+REDIS_HOST = '127.0.0.1' 
+# # os.environ.get('REDIS_HOST', default='127.0.0.1'),
+REDIS_PORT = 6379
+
+# Cacheops
+CACHEOPS_REDIS = {
+    'host': REDIS_HOST, # redis-server is on same machine
+    'port': REDIS_PORT,        # default redis port
+    'db': 2,             # SELECT non-default redis database
+}
+
+CACHEOPS_DEFAULTS = {
+    'timeout': 60*30
+}
+
+CACHEOPS = {
+    'detector.DetectorData': {'ops': 'all', 'timeout': 60*120},
+    'detector.Detector': {'ops': {}, 'timeout': 60*120},
+}
+
+# Celery
+# CELERY_REDIS_DB = '1'
+# CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/{CELERY_REDIS_DB}'
+# CELERY_BROKER_TRANSPORT_OPTIONS = {'visiblity_timeout': 3600}
+# CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}/{CELERY_REDIS_DB}'
+# CELERY_ACCEPT_CONTENT = ['json', 'applicaion/json', 'applicaion/text']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERILIZER = 'json'
