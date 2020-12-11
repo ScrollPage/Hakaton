@@ -13,6 +13,7 @@ import axios from "axios";
 import Alert from "@/components/UI/Alert";
 import App, { AppContext, AppProps } from "next/app";
 import RootModal from "@/components/Modal";
+import stylesheet from "antd/dist/antd.min.css";
 
 NProgress.configure({
   showSpinner: false,
@@ -26,6 +27,7 @@ Router.events.on("routeChangeError", () => NProgress.done());
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
+      <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
       <style dangerouslySetInnerHTML={{ __html: nprogress }} />
       <Head>
         <meta
