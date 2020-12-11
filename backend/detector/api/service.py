@@ -6,31 +6,17 @@ class ListViewSet(GenericViewSet, ListModelMixin):
     pass
 
 
-def slice_data_by_timestamp(queryset):
+def slice_data_by_timestamp(queryset, begin_time, end_time):
     res = list()
     i = 0
     time = datetime.now().date()
 
-    @cached_as(queryset)
-    def _get_detector_data():
-        return DetectorData.objects.filter(detector__in=queryset).nocache()
-
-    timestamp_aggregation = queryset.aggregate(
-            min_timestamp=Min('data__timestamp'),
-            max_timestamp=Max('data__timestamp')
+    while begin_time + timedelta(days=i) <= end_time:
+        date_sliced_queryset = queryset.filter(
+            timestamp=min_timestamp+timedelta(days=i)
         )
-
-    detector_data_queryset = _get_detector_data()
-
-    min_timestamp = timestamp_aggregation['min_timestamp']
-    max_timestamp = timestamp_aggregation['max_timestamp']
-    if min_timestamp and max_timestamp:
-        while min_timestamp + timedelta(days=i) <= max_timestamp:
-            date_sliced_queryset = detector_data_queryset.filter(
-                timestamp=min_timestamp+timedelta(days=i)
-            )
-            i += 1
-            res.append(date_sliced_queryset)
+        i += 1
+        res.append(date_sliced_queryset)
 
     return res
 
