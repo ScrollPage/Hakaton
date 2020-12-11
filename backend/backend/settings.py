@@ -196,8 +196,8 @@ SIMPLE_JWT = {
 # smtp
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'CFHFYXF228hec;$' #os.environ.get('EMAIL_HOST_USER', local.EMAIL_HOST_PASSWORD)
-EMAIL_HOST_PASSWORD = 'marsberrytracker@gmail.com' #os.environ.get('EMAIL_HOST_PASSWORD', local.EMAIL_HOST_USER)
+EMAIL_HOST_USER = 'marsberrytracker@gmail.com' #os.environ.get('EMAIL_HOST_USER', local.EMAIL_HOST_PASSWORD)
+EMAIL_HOST_PASSWORD = 'CFHFYXF228hec;$' #os.environ.get('EMAIL_HOST_PASSWORD', local.EMAIL_HOST_USER)
 EMAIL_PORT = 587
 
 # REDIS related settings
