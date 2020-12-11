@@ -6,9 +6,6 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
-export const SDetectorDataModalBody = styled.div`
-`;
-
 export const Title = styled.h2`
   margin-bottom: 20px;
   font-family: Play;

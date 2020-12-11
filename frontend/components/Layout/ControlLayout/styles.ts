@@ -6,7 +6,7 @@ export const Header = styled.div`
   position: fixed;
   top: 0; 
   left: 249px;
-  width: 100%;
+  width: calc(100% - 250px);
   height: 120px;
   z-index: 4;
   background: url("/main/bgc.png") bottom no-repeat #000;
@@ -14,7 +14,7 @@ export const Header = styled.div`
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  padding: 0 50px 0 50px;
+  padding: 0 50px;
   display: flex;
   justify-content: space-between;
 `
@@ -36,13 +36,13 @@ export const Side = styled.div``
 
 export const NavLink = styled.div`
  > a {
-  font-family: "Play";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 28px;
-  color: #FFFFFF;
-  margin-left: 50px;
+    font-family: "Play";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    color: #FFFFFF;
+    margin-left: 50px; 
  }
 `
 
@@ -88,14 +88,22 @@ export const Circle = styled.div`
   height: 74px;
   width: 74px;
   border-radius: 50%;
-  background-color: #C4C4C4;
+  background-color: #FFF;
   margin-bottom: 32px;
 `
 
 export const Nav = styled.div`
   display: flex;
+  width: 100%;
   height: 100%;
   display: flex;
+  align-items: center;
+`
+
+export const NavContainer = styled.div`
+  padding: 0 0px 0 50px;
+  display: flex;
+  width: 100%;
   align-items: center;
 `
 

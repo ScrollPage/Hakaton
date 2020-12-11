@@ -7,12 +7,21 @@ import styled from "styled-components";
 import ControlLayout from "@/components/Layout/ControlLayout";
 import Container from "@/components/UI/Container";
 import Head from "next/head";
+import ErrorMessage from "@/components/UI/ErrorMessage";
 
 interface ControlProps {
   detectors: IDetector[] | null;
 }
 
-const Control = ({ detectors, clusters }: ControlProps) => {
+const renderDetectors = (detectors: IDetector[]) => {
+  return detectors.map((detector) => {
+    return <div>{detector.id}</div>;
+  });
+};
+
+const Control = ({}: ControlProps) => {
+  const detectors = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
+
   return (
     <ControlLayout>
       <Container>
@@ -21,7 +30,10 @@ const Control = ({ detectors, clusters }: ControlProps) => {
             <title>Управление</title>
           </Head>
           <Title>Управление</Title>
-          <Main></Main>
+          <Main>
+            {!detectors && <ErrorMessage message="Ошибка вывода теплиц" />}
+            {detectors && renderDetectors(detectors)}
+          </Main>
         </Wrapper>
       </Container>
     </ControlLayout>
@@ -62,16 +74,6 @@ const Wrapper = styled.div`
     padding: 0px 0px 80px 0px;
   }
 `;
-
-const Detectors = styled.div`
-  margin-right: 10px;
-  @media (max-width: 1199.98px) {
-    margin-right: 0px;
-    margin-bottom: 10px;
-  }
-`;
-
-const Clusters = styled.div``;
 
 const Title = styled.h1`
   font-family: Play;
