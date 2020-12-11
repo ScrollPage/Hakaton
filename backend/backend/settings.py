@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+from . import local
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'djoser',
     'rest_auth',
     'rest_framework',
+    'rest_framework.authtoken',
     'silk',
 
     'client',
@@ -191,9 +193,16 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-# #REDIS related settings
+# smtp
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'CFHFYXF228hec;$' #os.environ.get('EMAIL_HOST_USER', local.EMAIL_HOST_PASSWORD)
+EMAIL_HOST_PASSWORD = 'marsberrytracker@gmail.com' #os.environ.get('EMAIL_HOST_PASSWORD', local.EMAIL_HOST_USER)
+EMAIL_PORT = 587
+
+# REDIS related settings
 REDIS_HOST = '127.0.0.1' 
-# # os.environ.get('REDIS_HOST', default='127.0.0.1'),
+# os.environ.get('REDIS_HOST', default='127.0.0.1'),
 REDIS_PORT = 6379
 
 # Cacheops
@@ -213,10 +222,14 @@ CACHEOPS = {
 }
 
 # Celery
-# CELERY_REDIS_DB = '1'
-# CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/{CELERY_REDIS_DB}'
-# CELERY_BROKER_TRANSPORT_OPTIONS = {'visiblity_timeout': 3600}
-# CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}/{CELERY_REDIS_DB}'
-# CELERY_ACCEPT_CONTENT = ['json', 'applicaion/json', 'applicaion/text']
-# CELERY_TASK_SERIALIZER = 'json'
-# CELERY_RESULT_SERILIZER = 'json'
+CELERY_REDIS_DB = '1'
+CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/{CELERY_REDIS_DB}'
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visiblity_timeout': 3600}
+CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}/{CELERY_REDIS_DB}'
+CELERY_ACCEPT_CONTENT = ['json', 'applicaion/json', 'applicaion/text']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERILIZER = 'json'
+
+#Domains
+DJANGO_DOMAIN = 'http://127.0.0.1:8000'
+REACT_DOMAIN = 'http://127.0.0.1:3000'
