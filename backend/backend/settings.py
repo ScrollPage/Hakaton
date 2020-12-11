@@ -45,12 +45,14 @@ INSTALLED_APPS = [
     'djoser',
     'rest_auth',
     'rest_framework',
+    'silk',
 
     'client',
     'detector',
 ]
 
 MIDDLEWARE = [
+    'silk.middleware.SilkyMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
