@@ -1,4 +1,3 @@
-import { instanceWithSSR } from "@/api";
 import { IDetector } from "@/types/detector";
 import { ensureAuth } from "@/utils.ts/ensure";
 import { GetServerSideProps } from "next";
@@ -9,9 +8,8 @@ import Container from "@/components/UI/Container";
 import Head from "next/head";
 import ErrorMessage from "@/components/UI/ErrorMessage";
 import { Detector } from "@/components/Detector";
-import { SButton } from "@/components/UI/Button";
 import { show } from "@/store/actions/alert";
-import { getDate } from "@/store/selectors";
+import { getDate, getBeginDate } from "@/store/selectors";
 import { nextDate } from "@/store/actions/date";
 import Cookie from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,11 +41,13 @@ const renderDetectors = (detectors: IDetector[]) => {
 
 const Control = ({}: ControlProps) => {
   const date = useSelector(getDate);
+  const begin = useSelector(getBeginDate);
   const dispatch = useDispatch();
 
   useEffect(() => {
     Cookie.set("date", String(date));
-  }, [date]);
+    Cookie.set("begin", String(begin));
+  }, [date, begin]);
 
   const changeDate = () => {
     if (date === new Date("2054-12-31")) {
@@ -58,15 +58,15 @@ const Control = ({}: ControlProps) => {
     }
   };
 
-  const plusDate = () => {
-    let plusDate = new Date(date);
-    plusDate.setDate(plusDate.getDate() + 1);
-    return plusDate;
+  const minusDate = () => {
+    let newDate = new Date(date);
+    newDate.setDate(newDate.getDate() - 1);
+    return newDate;
   };
 
   // const recurs = () => {
-  //   setTimeout(() => recurs(), 15 * 1000);
-  //   dispatch(nextDate());
+  //   setTimeout(() => recurs(), 1 * 1000);
+  //   changeDate();
   // };
 
   // useEffect(() => {
@@ -74,8 +74,8 @@ const Control = ({}: ControlProps) => {
   // }, []);
 
   const { data: detectors, error } = useSWR(
-    `/api/detector?begin_date=${formatDate(date)}&end_date=${formatDate(
-      plusDate()
+    `/api/detector?begin_date=${formatDate(minusDate())}&end_date=${formatDate(
+      date
     )}`
   );
 
@@ -84,12 +84,12 @@ const Control = ({}: ControlProps) => {
       <Container>
         <Wrapper>
           <Head>
-            <title>Управление</title>
+            <title>Теплицы</title>
           </Head>
           <Header>
-            <Title>Управление</Title>
+            <Title>Теплицы</Title>
           </Header>
-          <Text>Результаты на {formatDate(date)}</Text>
+          <Text>Данные на {formatDate(date)}</Text>
           <Main>
             {error && (
               <ErrorMessage message="Ошибка вывода информации о теплицах" />
@@ -112,7 +112,6 @@ export const getServerSideProps: GetServerSideProps<ControlProps> = async (
   ctx
 ) => {
   ensureAuth(ctx);
-
   return {
     props: {},
   };
@@ -139,7 +138,7 @@ export const Header = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 69px 80px 80px 80px;
+  padding: 62px 80px 80px 80px;
   @media (max-width: 1199.98px) {
     padding: 0px 30px 80px 30px;
   }
@@ -167,13 +166,4 @@ const Main = styled.div`
   @media (max-width: 1199.98px) {
     flex-direction: column;
   }
-`;
-
-const Num = styled.div`
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 44px;
-  color: #000000;
 `;
