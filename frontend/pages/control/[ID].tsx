@@ -45,6 +45,19 @@ const ControlData = ({}: ControlDataProps) => {
 
   const dateFormat = "YYYY-MM-DD";
 
+  const renderLabel = (param: IParam) => {
+    switch (param) {
+      case "temp":
+        return "Температура";
+      case "humidity":
+        return "Влажность";
+      case "lightning":
+        return "Освещенность";
+      case "pH":
+        return "Кислотность";
+    }
+  };
+
   return (
     <ControlLayout>
       <Container>
@@ -52,7 +65,7 @@ const ControlData = ({}: ControlDataProps) => {
           <Head>
             <title>Данные о теплице</title>
           </Head>
-          <Title>Данные о теплице</Title>
+          <Title>Теплица {query.ID}</Title>
           <SButton
             myType="orange"
             small
@@ -97,7 +110,7 @@ const ControlData = ({}: ControlDataProps) => {
                 <Option value="temp">Температура</Option>
                 <Option value="humidity">Влажность</Option>
                 <Option value="lightning">Освещенность</Option>
-                <Option value="pH">Водородный показатель</Option>
+                <Option value="pH">Кислотность</Option>
               </Select>
             </MySelect>
             {error && (
@@ -109,7 +122,11 @@ const ControlData = ({}: ControlDataProps) => {
             )}
             {detectorData && (
               <>
-                <Chart detectorData={detectorData} param={index} />
+                <Chart
+                  detectorData={detectorData}
+                  param={index}
+                  label={renderLabel(index)}
+                />
                 <Donat detectorData={detectorData} param={index} />
               </>
             )}

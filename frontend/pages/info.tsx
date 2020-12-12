@@ -6,9 +6,9 @@ import Container from "@/components/UI/Container";
 import Head from "next/head";
 import ControlLayout from "@/components/Layout/ControlLayout";
 
-interface SucureProps {}
+interface InfoProps {}
 
-const Sucure = ({}: SucureProps) => {
+const Info = ({}: InfoProps) => {
   return (
     <ControlLayout>
       <Container>
@@ -49,9 +49,9 @@ const Sucure = ({}: SucureProps) => {
   );
 };
 
-export default Sucure;
+export default Info;
 
-export const getServerSideProps: GetServerSideProps<SucureProps> = async (
+export const getServerSideProps: GetServerSideProps<InfoProps> = async (
   ctx
 ) => {
   ensureAuth(ctx);
