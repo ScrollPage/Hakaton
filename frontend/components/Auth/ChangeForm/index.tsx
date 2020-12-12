@@ -5,7 +5,7 @@ import { SButton } from "@/components/UI/Button";
 import Input from "@/components/UI/Input";
 import { object, string } from "yup";
 import { useDispatch } from "react-redux";
-import { authLogin } from "@/store/actions/auth";
+import { authInfoChange } from "@/store/actions/auth";
 
 const validationSchema = object().shape({
   firstName: string()
@@ -16,25 +16,23 @@ const validationSchema = object().shape({
     .min(3, "Слишком короткая фамилия")
     .max(15, "Слишком длинная фамилия")
     .required("Введите фамилию"),
-  email: string().email("Некорректный E-mail").required("Введите E-mail"),
 });
 
 interface FormValues {
   firstName: string;
   lastName: string;
-  email: string;
 }
 
 interface ChangeFormProps {
   initialFirstName: string;
   initialLastName: string;
-  initialEmail: string;
+  setClose: () => void;
 }
 
 const ChangeForm: React.FC<ChangeFormProps> = ({
   initialFirstName,
   initialLastName,
-  initialEmail,
+  setClose,
 }) => {
   const dispatch = useDispatch();
 
@@ -44,15 +42,14 @@ const ChangeForm: React.FC<ChangeFormProps> = ({
         initialValues={{
           firstName: initialFirstName ?? "",
           lastName: initialLastName ?? "",
-          email: initialEmail ?? "",
         }}
         validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting, resetForm }) => {
+        onSubmit={async (values, { setSubmitting, resetForm }) => {
           setSubmitting(true);
-          // await dispatch(authLogin(values.email, values.password));
-          console.log(values);
+          await dispatch(authInfoChange(values.firstName, values.lastName));
           setSubmitting(false);
           resetForm();
+          setClose();
         }}
       >
         {(props: FormikProps<FormValues>) => (
@@ -61,17 +58,18 @@ const ChangeForm: React.FC<ChangeFormProps> = ({
               type="text"
               name="firstName"
               placeholder="Введите имя"
-              src="user"
+              src="user_another"
+              another
             />
             <Input
               type="text"
               name="lastName"
               placeholder="Введите фамилию"
-              src="user"
+              src="user_another"
+              another
             />
-            <Input type="text" name="email" placeholder="E-mail" src="email" />
-            <SButton myType="white" type="submit">
-              Изменить
+            <SButton myType="nwhite" type="submit">
+              Сохранить изменения
             </SButton>
           </Form>
         )}

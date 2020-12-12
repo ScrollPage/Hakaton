@@ -8,6 +8,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   width?: string;
   src: string;
+  another?: boolean;
 };
 
 const Input: React.FC<InputProps> = (props) => {
@@ -23,6 +24,7 @@ const Input: React.FC<InputProps> = (props) => {
         {...props}
         isShowError={isShowError}
         width={props?.width}
+        another={props?.another}
       />
       {isShowError && <Error>{meta.error}</Error>}
     </Wrapper>

@@ -4,6 +4,6 @@ export interface IUser {
   about: {
     number: number;
     email: string;
-    history: string;
+    position: string;
   };
 }

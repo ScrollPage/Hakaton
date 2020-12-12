@@ -19,7 +19,7 @@ export const UserItem: React.FC<{ user: IUser }> = ({ user }) => {
   return (
     <Wrapper>
       <Face>
-        <Image src="/control/user.png" height={70} width={70} />
+        <Image src="/control/user.svg" height={56} width={56} />
       </Face>
       <Main>
         <Field>{user.firstName}</Field>

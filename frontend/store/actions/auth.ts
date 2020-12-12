@@ -55,7 +55,7 @@ export const authLogin = (email: string, password: string): ThunkType => async d
       dispatch(checkAuthTimeout(24 * 3600 * 1000));
       dispatch(authInfo());
 
-      Router.push({ pathname: '/control' }, undefined, { shallow: true });
+      Router.push({ pathname: '/info' }, undefined, { shallow: true });
 
       dispatch(show('Вы успешно вошли!', 'success'));
     })
@@ -77,6 +77,25 @@ export const authInfo = (): ThunkType => async dispatch => {
     })
     .catch(() => {
       dispatch(show('Ошибка при взятии информации о пользователе!', 'warning'));
+    });
+};
+
+export const authInfoChange = (firstName: string, lastName: string): ThunkType => async dispatch => {
+  const token = Cookie.get('token');
+  await instance(token)
+    .put('/auth/users/me/', {
+      first_name: firstName,
+      last_name: lastName
+    })
+    .then(() => {
+      Cookie.set('firstName', firstName);
+      Cookie.set('lastName', lastName);
+
+      dispatch(show('Информация успешно изменена!', 'success'));
+      Router.push({ pathname: '/secure' }, undefined, { shallow: true });
+    })
+    .catch(() => {
+      dispatch(show('Ошибка при изменении информации!', 'warning'));
     });
 };
 

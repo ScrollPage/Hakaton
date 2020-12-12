@@ -20,15 +20,9 @@ export const Wrapper = styled.div`
         height: 100%;
         width: 100%;
         background-color: #fff;
-        padding: 40px;
-        border-radius: 5px;
-        border: 1px solid #d9d9d9;
-        .root-modal__close {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            cursor: pointer;
-        }
+        padding: 45px;
+        background: #F6F7F8;
+        border-radius: 20px;
     }
 `;
 
@@ -36,17 +30,18 @@ export const Close = styled.div`
     position: absolute;
     height: 18px;
     width: 18px;
-    top: 15px;
-    right: 15px;
+    top: 45px;
+    right: 45px;
     cursor: pointer;
     &:after, &:before {
       content: '';
       position: absolute;
-      height: 18px;
-      width: 3px;
+      height: 29px;
+      width: 2px;
       background-color: #000;
       top: 50%;
       left: 50%;
+      border-radius: 1px;
     }
     &:after {
         transform: translateX(-50%) translateY(-50%) rotate(45deg);

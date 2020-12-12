@@ -54,12 +54,12 @@ export const Text = styled.div`
 export const Title = styled.h2`
   font-family: Raleway;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 600;
   font-size: 24px;
   line-height: 28px;
   color: #000000;
-  text-align: left;
-  margin-bottom: 36px;
+  margin-bottom: 80px;
+  text-align: center;
 `;
 
 

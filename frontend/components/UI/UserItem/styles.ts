@@ -16,6 +16,10 @@ export const Face = styled.div`
   width: 74px;
   background-color: #fff;
   border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center; 
+  align-items: flex-end;
 `
 
 export const Main = styled.div`

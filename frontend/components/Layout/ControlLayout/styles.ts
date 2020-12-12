@@ -36,13 +36,14 @@ export const Side = styled.div``
 
 export const NavLink = styled.div`
  > a {
-    font-family: "Play";
+    font-family: Raleway;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 300;
     font-size: 24px;
     line-height: 28px;
     color: #FFFFFF;
-    margin-left: 50px; 
+    margin-left: 40px;
+    letter-spacing: 2px;
  }
 `
 
@@ -85,11 +86,15 @@ export const Rectangle = styled.div`
   flex-direction: column;
 `
 export const Circle = styled.div`
+  overflow: hidden;
   height: 74px;
   width: 74px;
   border-radius: 50%;
   background-color: #FFF;
   margin-bottom: 32px;
+  display: flex;
+  justify-content: center; 
+  align-items: flex-end;
 `
 
 export const Nav = styled.div`
