@@ -7,12 +7,19 @@ from datetime import datetime, timedelta
 
 class Detector(models.Model):
 
-    def _str__(self):
+    def __str__(self):
         return str(self.id)
 
     class Meta:
         verbose_name = 'Датчик'
         verbose_name_plural = 'Датчики'
+
+    @property
+    def get_data_by_timestamp(self, date1, date2):
+        return self.data.filter(
+            timestamp__gte=begin_date,
+            timestamp__lt=end_date
+        )
 
 class DetectorData(models.Model):
     detector = models.ForeignKey(

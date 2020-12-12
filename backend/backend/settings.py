@@ -247,3 +247,8 @@ DJOSER = {
         'current_user': 'client.api.serializers.ClientMeSerializer',
     },
 }
+
+NORMAL_PH = 6.64
+NORMAL_LIGHTNING = 43.9
+NORMAL_HUMIDITY = 45.97
+NORMAL_TEMP = 22.86 

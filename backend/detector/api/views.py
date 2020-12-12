@@ -2,7 +2,8 @@ from rest_framework.generics import ListAPIView
 from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.db.models import Min, Max
+from django.db.models import Min, Max, Prefetch, Count, Q, OuterRef
+from django.conf import settings
 
 import datetime as dt
 from cacheops import cached_as
@@ -19,6 +20,56 @@ class DetectorListView(ListViewSet):
     serializer_class_by_action = {
         'get_mean_data': DetectorDataSerializer
     }
+    
+    def list(self, request, *args, **kwargs):
+        if not request.user.system:
+            begin_date, end_date, currency = self.get_query_params_date()
+            detectors = self.get_queryset() \
+                .prefetch_related(
+                    Prefetch(
+                        'data',
+                        queryset=DetectorData.objects.filter(
+                            timestamp__gte=begin_date,
+                            timestamp__lt=end_date 
+                        ) .defer('detector')
+                    )
+                )
+
+
+            @cached_as(Detector, extra=self.get_query_params_date())
+            def _get_annotation(detectors=detectors):
+                return detectors \
+                .annotate(bad_pH=Count('data', exclude=Q(
+                    data__pH__gte=settings.NORMAL_PH*0.95,
+                    data__pH__lte=settings.NORMAL_PH*1.05,
+                    data__timestamp__lte=begin_date,
+                    data__timestamp__gte=end_date
+                ), distnct=True)) \
+                .annotate(bad_lightning=Count('data', exclude=Q(
+                    data__lightning__gte=settings.NORMAL_LIGHTNING*0.9,
+                    data__lightning__lte=settings.NORMAL_LIGHTNING*1.1,
+                    data__timestamp__lte=begin_date,
+                    data__timestamp__gte=end_date
+                ), distnct=True)) \
+                .annotate(bad_humidity=Count('data', exclude=Q(
+                    data__humidity__gte=settings.NORMAL_HUMIDITY*0.9,
+                    data__humidity__lte=settings.NORMAL_HUMIDITY*1.1,
+                    data__timestamp__lte=begin_date,
+                    data__timestamp__gte=end_date
+                ), distnct=True)) \
+                .annotate(bad_temp=Count('data', exclude=Q(
+                    data__temp__gte=settings.NORMAL_TEMP*0.9,
+                    data__temp__lte=settings.NORMAL_TEMP*1.1,
+                    data__timestamp__lte=begin_date,
+                    data__timestamp__gte=end_date
+                ), distnct=True))
+
+            detectors = _get_annotation()
+
+        else:
+            detectors = Detector.objects.none()
+        serializer = self.get_serializer(detectors, many=True)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     def get_query_params_date(self):
         begin_date = self.request.query_params.get('begin_date', '2055-01-01')
