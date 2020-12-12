@@ -45,7 +45,7 @@ export const Chart: React.FC<ChartProps> = ({ detectorData, param }) => {
         pointHoverBackgroundColor: "#E86900",
         pointHoverBorderColor: "rgba(220,220,220,1)",
         pointHoverBorderWidth: 2,
-        pointRadius: 1,
+        pointRadius: 4,
         pointHitRadius: 10,
       },
     ],

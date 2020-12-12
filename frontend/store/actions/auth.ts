@@ -80,6 +80,25 @@ export const authInfo = (): ThunkType => async dispatch => {
     });
 };
 
+export const authInfoChange = (firstName: string, lastName: string): ThunkType => async dispatch => {
+  const token = Cookie.get('token');
+  await instance(token)
+    .put('/auth/users/me/', {
+      first_name: firstName,
+      last_name: lastName
+    })
+    .then(() => {
+      Cookie.set('firstName', firstName);
+      Cookie.set('lastName', lastName);
+
+      dispatch(show('Информация успешно изменена!', 'success'));
+      Router.push({ pathname: '/secure' }, undefined, { shallow: true });
+    })
+    .catch(() => {
+      dispatch(show('Ошибка при изменении информации!', 'warning'));
+    });
+};
+
 export const logout = (isRedirect: boolean): ThunkType => () => {
   if (isRedirect) {
     Router.push({ pathname: '/' }, undefined, { shallow: true });

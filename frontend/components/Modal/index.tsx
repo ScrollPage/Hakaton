@@ -5,9 +5,11 @@ import { modalHide } from "@/store/actions/modal";
 import { BackDrop, Wrapper, Close } from "./styles";
 
 import UserDataModal from "./UserDataModal";
+import ChangeDataModal from "./ChangeDataModal";
 
 const MODAL_COMPONENTS = {
   USER_DATA_MODAL: UserDataModal,
+  CHANGE_DATA_MODAL: ChangeDataModal,
 };
 
 const RootModal: React.FC = () => {

@@ -36,13 +36,14 @@ export const Side = styled.div``
 
 export const NavLink = styled.div`
  > a {
-    font-family: "Play";
+    font-family: Raleway;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 300;
     font-size: 24px;
     line-height: 28px;
     color: #FFFFFF;
-    margin-left: 50px; 
+    margin-left: 40px;
+    letter-spacing: 2px;
  }
 `
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div<{ width?: string }>`
   position: relative;
@@ -8,20 +8,20 @@ export const Wrapper = styled.div<{ width?: string }>`
   width: 350px;
 `;
 
-export const Inner = styled.input <{ isShowError?: boolean, width?: string }> `
+export const Inner = styled.input <{ isShowError?: boolean, width?: string, another?: boolean }> `
   border: 1.5px solid ${({ isShowError }) => isShowError ? 'red' : "rgba(196, 196, 196, 0.3)"};
   padding: 20px 50px;
   background-color: rgba(196, 196, 196, 0.3);
   backdrop-filter: blur(4px);
   font-family: "Play";
-  color: #fff;
+  color: ${({ another }) => another ? '#000' : '#fff'};
   font-size: 18px;
   border-radius: 20px;
   outline: none;
   ::placeholder {
     color: ${({ theme }) => theme.white};
     font-size: 18px;
-  }  
+  }
 `;
 
 export const Error = styled.small`

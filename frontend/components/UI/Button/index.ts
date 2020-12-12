@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const SButton = styled.button<{ myType: "white" | "blue" | "orange", small?: boolean, middle?: boolean }>`
+export const SButton = styled.button<{ myType: "white" | "blue" | "orange" | "nwhite", small?: boolean, middle?: boolean }>`
   box-sizing: border-box;
   outline: none;
   cursor: pointer;
@@ -21,6 +21,22 @@ export const SButton = styled.button<{ myType: "white" | "blue" | "orange", smal
     &:hover {
       background-color: #fff;
       color: #000;
+    }
+  `};
+
+  ${({ myType, small }) => myType === 'nwhite' && css`
+    height: 60px;
+    border-radius: 20px;
+    width: ${small ? "150px" : "350px"};
+    background-color: transparent;
+    border: 1px solid #000;
+    font-family: "Play";
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    color: #000;
+    &:hover {
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
     }
   `};
 
@@ -55,7 +71,6 @@ export const SButton = styled.button<{ myType: "white" | "blue" | "orange", smal
     color: #000000;
     font-weight: normal;
     &:hover {
-      /* background-color: transparent; */
       box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
     }
   `};

@@ -34,20 +34,14 @@ const ControlLayout: React.FC<ControlLayoutProps> = ({ children }) => {
       <Header>
         <Nav>
           <NavContainer>
-            <Image height={84} width={114} src="/main/logo.svg" />
+            <Link href="/">
+              <a>
+                <Image height={84} width={114} src="/main/logo.svg" />
+              </a>
+            </Link>
             <NavLink>
               <Link href="/">
-                <a>Главная</a>
-              </Link>
-            </NavLink>
-            <NavLink>
-              <Link href="/">
-                <a>Инструкция</a>
-              </Link>
-            </NavLink>
-            <NavLink>
-              <Link href="/">
-                <a>Поддержка</a>
+                <a>LoRaWan Dam</a>
               </Link>
             </NavLink>
           </NavContainer>
@@ -86,7 +80,7 @@ const ControlLayout: React.FC<ControlLayoutProps> = ({ children }) => {
           </SideLink>
           <SideLink active={pathname === "/secure"}>
             <Link href="/secure">
-              <a>Настройки</a>
+              <a>Профиль</a>
             </Link>
           </SideLink>
         </Side>
