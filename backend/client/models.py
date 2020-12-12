@@ -69,10 +69,10 @@ class Client(AbstractBaseUser, PermissionsMixin):
     def get_full_name(self):
         return self.last_name + ' ' + self.first_name
 
-@receiver(post_save, sender=Client)
-def send_conf_mail(sender, instance=None, created=False, **kwargs):
-    '''Отправляет письмо с подтверждением'''
-    if created:
-        if not instance.is_superuser:
-            token = Token.objects.create(user=instance)
-            send_activation_email.delay(instance.email, token.key)
+# @receiver(post_save, sender=Client)
+# def send_conf_mail(sender, instance=None, created=False, **kwargs):
+#     '''Отправляет письмо с подтверждением'''
+#     if created:
+#         if not instance.is_superuser:
+#             token = Token.objects.create(user=instance)
+#             send_activation_email.delay(instance.email, token.key)

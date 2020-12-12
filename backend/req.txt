@@ -32,6 +32,7 @@ funcy==1.15
 gprof2dot==2019.11.30
 gunicorn==20.0.4
 idna==2.10
+install==1.3.4
 ipython==7.19.0
 ipython-genutils==0.2.0
 itypes==1.2.0
@@ -56,6 +57,7 @@ pycparser==2.20
 Pygments==2.7.3
 PyJWT==1.7.1
 pyparsing==2.4.7
+pyTelegramBotAPI==3.7.4
 python-dateutil==2.8.1
 python3-openid==3.2.0
 pytz==2020.4

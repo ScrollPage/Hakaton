@@ -8,7 +8,12 @@ from django.conf import settings
 import datetime as dt
 from cacheops import cached_as
 
-from .service import ListViewSet, slice_data_by_timestamp, queryset_mean
+from .service import (
+    ListViewSet, 
+    slice_data_by_timestamp, 
+    queryset_mean, 
+    send_report_email
+)
 from detector.models import Detector, DetectorData
 from .serializers import DetectorSerializer, DetectorDataSerializer
 
@@ -22,8 +27,8 @@ class DetectorListView(ListViewSet):
     }
     
     def list(self, request, *args, **kwargs):
+        begin_date, end_date, currency = self.get_query_params_date()
         if not request.user.system:
-            begin_date, end_date, currency = self.get_query_params_date()
             detectors = self.get_queryset() \
                 .prefetch_related(
                     Prefetch(
@@ -88,6 +93,7 @@ class DetectorListView(ListViewSet):
 
         else:
             detectors = Detector.objects.none()
+        send_report_email.delay(request.user.email, begin_date, end_date)
         serializer = self.get_serializer(detectors, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 

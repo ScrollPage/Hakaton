@@ -26,4 +26,5 @@ urlpatterns = [
 
     path('api/', include('detector.api.urls')),
     path('api/', include('neuro.api.urls')),
+    path('api/', include('client.api.urls')),
 ]
