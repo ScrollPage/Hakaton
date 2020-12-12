@@ -12,7 +12,8 @@ from .service import (
     ListViewSet, 
     slice_data_by_timestamp, 
     queryset_mean, 
-    send_report_email
+    send_report_email,
+    make_content
 )
 from detector.models import Detector, DetectorData
 from .serializers import DetectorSerializer, DetectorDataSerializer
@@ -28,17 +29,21 @@ class DetectorListView(ListViewSet):
     
     def list(self, request, *args, **kwargs):
         begin_date, end_date, currency = self.get_query_params_date()
-        if not request.user.system:
-            detectors = self.get_queryset() \
-                .prefetch_related(
-                    Prefetch(
-                        'data',
-                        queryset=DetectorData.objects.filter(
-                            timestamp__gte=begin_date,
-                            timestamp__lt=end_date 
-                        ) .defer('detector')
-                    )
+
+        detectors, fl = self.get_queryset() \
+            .prefetch_related(
+                Prefetch(
+                    'data',
+                    queryset=DetectorData.objects.filter(
+                        timestamp__gte=begin_date,
+                        timestamp__lt=end_date 
+                    ) .defer('detector')
                 )
+            ), False
+
+        if not request.user.system:
+            
+            fl = True
 
             @cached_as(Detector, extra=self.get_query_params_date())
             def _get_annotation(detectors=detectors):
@@ -91,9 +96,8 @@ class DetectorListView(ListViewSet):
 
             detectors = _get_annotation()
 
-        else:
-            detectors = Detector.objects.none()
-        send_report_email.delay(request.user.email, begin_date, end_date)
+        content = make_content(detectors, fl)
+        send_report_email.delay(request.user.email, begin_date, end_date, content)
         serializer = self.get_serializer(detectors, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 

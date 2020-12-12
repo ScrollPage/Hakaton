@@ -78,16 +78,15 @@ def queryset_mean(queryset, *args):
     return list(map(map_slicing_func, queryset))
 
 @celery_app.task
-def send_report_email(user_email, date1, date2, data=None):
-    title = f'Отчет за {date1} - {date2}'
-    
+def send_report_email(user_email, date1, date2, content):
+    title = f"Отчет за {date1.split('T')[0]} - {date2.split('T')[0]}"
     html_content = render_to_string(
         'report_template.html',
         {'title': title, 'content': content}
     )
     text_content = strip_tags(html_content)
     email = EmailMultiAlternatives(
-        'Отчетность за день',
+        title,
         text_content,
         'Mars Berry Tracker',
         [user_email],
@@ -95,14 +94,15 @@ def send_report_email(user_email, date1, date2, data=None):
     email.attach_alternative(html_content, 'text/html')
     email.send()
 
-def make_content(data):
-    if data:
+def make_content(data, fl):
+    if fl:
         content = ''
-        for det in detectors:
-            content += f'Отчет из теплицы №{det.id}\n'
-            content += f'Данные по показателю кислотности: {round(det.good_pH/7, 2)}% данных попали в диапазон лучших значений!\n'
-            content += f'Данные по показателю влажности: {round(det.good_humidity/7, 2)}% данных попали в диапазон лучших значений!\n'
-            content += f'Данные по показателю освещение: {round(det.good_lightning/7, 2)}% данных попали в диапазон лучших значений!\n'
-            content += f'Данные по показателю температура: {round(det.good_pH/7, 2)}% данных попали в диапазон лучших значений!\n\n'
+        for det in data:
+            content += f'Отчет из теплицы №{det.id}'
+            content += f'Данные по показателю кислотности: {100*round(det.good_pH/7, 2)}% данных попали в диапазон лучших значений!'
+            content += f'Данные по показателю влажности: {100*round(det.good_humidity/7, 2)}% данных попали в диапазон лучших значений!'
+            content += f'Данные по показателю освещение: {100*round(det.good_lightning/7, 2)}% данных попали в диапазон лучших значений!'
+            content += f'Данные по показателю температура: {100*round(det.good_pH/7, 2)}% данных попали в диапазон лучших значений!'
     else:
         content = 'С Вашими теплицами все в полном порядке!\n Мы поддерживаем Ваши данные в пределах нормы.'
+    return content
