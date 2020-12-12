@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-  padding: 20px;
-`
-
 export const Title = styled.div`
   font-family: Play;
   font-style: normal;
@@ -14,3 +10,7 @@ export const Title = styled.div`
   margin-bottom: 80px;
   text-align: center;
 `
+export const Wrapper = styled.div`
+  padding: 80px;
+`
+
