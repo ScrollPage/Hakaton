@@ -25,4 +25,5 @@ urlpatterns = [
     path('silk/', include('silk.urls')),
 
     path('api/', include('detector.api.urls')),
+    path('api/', include('neuro.api.urls')),
 ]
