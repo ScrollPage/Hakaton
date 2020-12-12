@@ -22,10 +22,3 @@ def send_activation_email(user_email, key):
     )
     email.attach_alternative(html_content, 'text/html')
     email.send()
-    # send_mail(
-    #     'Подтверждение регистрации',
-    #     f'Перейдите по ссылке, чтобы завершить регистрацию: {settings.REACT_DOMAIN}/account-activation?token={key}',
-    #     'Mars Berry Tracker',
-    #     [user_email],
-    #     fail_silently=False
-    # )
