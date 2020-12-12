@@ -1,0 +1,84 @@
+Values for all detectors. 2052-01-01 00:00:00 - 2052-03-31 00:00:00:
+
+min_ph = 5.630, max_ph = 8.360, avg_ph = 6.9774441900400687
+min_humidity = 23.530, max_humidity = 100.490, avg_humidity = 79.1753387850467290
+min_lightning = -2.500, max_lightning = 107.450, avg_lightning = 26.8688220064724919
+min_temp = -19.900, max_temp = 20.500, avg_temp = 6.6820224719101124
+
+Values for all detectors. 2052-04-01 00:00:00 - 2052-06-30 00:00:00:
+
+min_ph = 5.730, max_ph = 8.480, avg_ph = 6.9865113500597372
+min_humidity = 19.010, max_humidity = 102.050, avg_humidity = 65.5290742996345920
+min_lightning = -2.480, max_lightning = 107.330, avg_lightning = 31.7440128166005493
+min_temp = 6.100, max_temp = 35.500, avg_temp = 20.1234722222222222
+
+Values for all detectors. 2052-07-01 00:00:00 - 2052-09-30 00:00:00:
+
+min_ph = 5.540, max_ph = 8.320, avg_ph = 6.9563459787556904
+min_humidity = 24.350, max_humidity = 99.730, avg_humidity = 73.0349224583572659
+min_lightning = -2.490, max_lightning = 107.490, avg_lightning = 38.2023965721040189
+min_temp = 12.900, max_temp = 41.500, avg_temp = 26.7265109890109890
+
+Values for all detectors. 2052-10-01 00:00:00 - 2053-01-31 00:00:00:
+
+min_ph = 5.600, max_ph = 8.520, avg_ph = 6.9778064943671306
+min_humidity = 41.840, max_humidity = 102.010, avg_humidity = 84.5773961284230406
+min_lightning = -2.500, max_lightning = 107.470, avg_lightning = 11.7776312605855311
+min_temp = -2.100, max_temp = 24.900, avg_temp = 10.2137295081967213
+
+Values for all detectors. 2053-01-01 00:00:00 - 2053-03-31 00:00:00:
+
+min_ph = 5.840, max_ph = 8.480, avg_ph = 7.1018785942492013
+min_humidity = 23.690, max_humidity = 99.430, avg_humidity = 73.9216154642733863
+min_lightning = -2.500, max_lightning = 107.490, avg_lightning = 30.1968465909090909
+min_temp = -11.100, max_temp = 16.300, avg_temp = 3.8617977528089888
+
+Values for all detectors. 2053-04-01 00:00:00 - 2053-06-30 00:00:00:
+
+min_ph = 5.740, max_ph = 8.280, avg_ph = 7.0408369787109945
+min_humidity = 15.840, max_humidity = 99.340, avg_humidity = 58.2846091113610799
+min_lightning = -2.460, max_lightning = 107.480, avg_lightning = 47.0652360227653164
+min_temp = 6.700, max_temp = 39.300, avg_temp = 23.6951388888888889
+
+Values for all detectors. 2053-07-01 00:00:00 - 2053-09-30 00:00:00:
+
+min_ph = 5.570, max_ph = 8.290, avg_ph = 6.9611411077094350
+min_humidity = 18.770, max_humidity = 99.430, avg_humidity = 67.9720588235294118
+min_lightning = -2.490, max_lightning = 107.470, avg_lightning = 46.2127692307692308
+min_temp = 14.300, max_temp = 39.900, avg_temp = 28.4700549450549451
+
+Values for all detectors. 2053-10-01 00:00:00 - 2054-01-31 00:00:00:
+
+min_ph = 5.580, max_ph = 8.380, avg_ph = 7.0136541290187014
+min_humidity = 27.230, max_humidity = 102.340, avg_humidity = 82.2331109204033469
+min_lightning = -2.500, max_lightning = 107.440, avg_lightning = 25.4788663967611336
+min_temp = -9.400, max_temp = 27.900, avg_temp = 8.6036885245901639
+
+Values for all detectors. 2054-01-01 00:00:00 - 2054-03-31 00:00:00:
+
+min_ph = 5.750, max_ph = 8.220, avg_ph = 7.0240910434525569
+min_humidity = 26.300, max_humidity = 100.460, avg_humidity = 80.1212291786329696
+min_lightning = -2.500, max_lightning = 107.490, avg_lightning = 18.5626166031094163
+min_temp = -9.400, max_temp = 18.000, avg_temp = 7.3532303370786517
+
+Values for all detectors. 2054-04-01 00:00:00 - 2054-06-30 00:00:00:
+
+min_ph = 5.530, max_ph = 8.420, avg_ph = 6.9820399746192893
+min_humidity = 12.110, max_humidity = 99.470, avg_humidity = 55.4338112305854241
+min_lightning = -2.490, max_lightning = 107.470, avg_lightning = 45.5164106440882976
+min_temp = 7.000, max_temp = 40.600, avg_temp = 24.6919444444444444
+
+Values for all detectors. 2054-07-01 00:00:00 - 2054-09-30 00:00:00:
+
+min_ph = 5.560, max_ph = 8.270, avg_ph = 7.0108010047446274
+min_humidity = 22.560, max_humidity = 100.390, avg_humidity = 73.4859513590844063
+min_lightning = -2.450, max_lightning = 107.370, avg_lightning = 34.2233140495867769
+min_temp = 11.300, max_temp = 38.500, avg_temp = 25.2177197802197802
+
+Values for all detectors. 2054-10-01 00:00:00 - 2055-01-31 00:00:00:
+
+min_ph = 5.820, max_ph = 8.430, avg_ph = 7.0596188565697091
+min_humidity = 41.920, max_humidity = 102.380, avg_humidity = 82.6586231675768899
+min_lightning = -3.610, max_lightning = 107.470, avg_lightning = 15.4055816464237517
+min_temp = -0.900, max_temp = 30.900, avg_temp = 13.7936742934051144
+

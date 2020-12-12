@@ -34,3 +34,4 @@ class DetectorData(models.Model):
         verbose_name = 'Данные датчика'
         verbose_name_plural = 'Данные датчиков'
         indexes = [BrinIndex(fields=['timestamp'])]
+
