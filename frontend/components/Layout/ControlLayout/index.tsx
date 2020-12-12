@@ -65,7 +65,7 @@ const ControlLayout: React.FC<ControlLayoutProps> = ({ children }) => {
       <SideBar>
         <Rectangle>
           <Circle>
-            <Image src="/control/user.png" height={74} width={74} />
+            <Image src="/control/user.svg" height={56} width={56} />
           </Circle>
           <Name>
             {firstName} <br /> {lastName}

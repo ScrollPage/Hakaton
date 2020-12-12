@@ -25,7 +25,7 @@ const Users = ({}: UsersProps) => {
       about: {
         number: 89969494216,
         email: "0r20@mail.ru",
-        history: "Отличный парень хороший волк",
+        position: "Дизайнер",
       },
     },
     {
@@ -34,7 +34,7 @@ const Users = ({}: UsersProps) => {
       about: {
         number: 89969494216,
         email: "0r20@mail.ru",
-        history: "Отличный парень хороший волк",
+        position: "Дизайнер",
       },
     },
     {
@@ -43,7 +43,7 @@ const Users = ({}: UsersProps) => {
       about: {
         number: 89969494216,
         email: "0r20@mail.ru",
-        history: "Отличный парень хороший волк",
+        position: "Дизайнер",
       },
     },
     {
@@ -52,7 +52,7 @@ const Users = ({}: UsersProps) => {
       about: {
         number: 89969494216,
         email: "0r20@mail.ru",
-        history: "Отличный парень хороший волк",
+        position: "Дизайнер",
       },
     },
     {
@@ -61,7 +61,7 @@ const Users = ({}: UsersProps) => {
       about: {
         number: 89969494216,
         email: "0r20@mail.ru",
-        history: "Отличный парень хороший волк",
+        position: "Дизайнер",
       },
     },
   ];

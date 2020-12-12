@@ -85,11 +85,15 @@ export const Rectangle = styled.div`
   flex-direction: column;
 `
 export const Circle = styled.div`
+  overflow: hidden;
   height: 74px;
   width: 74px;
   border-radius: 50%;
   background-color: #FFF;
   margin-bottom: 32px;
+  display: flex;
+  justify-content: center; 
+  align-items: flex-end;
 `
 
 export const Nav = styled.div`
