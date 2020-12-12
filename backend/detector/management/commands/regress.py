@@ -12,6 +12,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 
 from detector.models import DetectorData
 from .service import write_to_file_or_return, X_to_values, get_all_mean, data_to_arr
+from neuro.models import Regressor
 
 def get_month(i):
     return (i) % 12
@@ -46,9 +47,9 @@ class Command(BaseCommand):
         clf = GradientBoostingRegressor(loss='ls', verbose=True, random_state=241, n_estimators=250, learning_rate=0.1)
         clf.fit(X_train, y_train)
         pred = clf.predict(X_train)
-        print(mean_sq_error(pred, y_train))
-        print(pred, y_train)
-        print(X_train)
+        reg, _ = Regressor.objects.get_or_create(id=1)
+        reg.model = clf
+        reg.save()
         # res, pH_linspace, humidity_linspace, lightning_linspace, temp_linspace = data_to_arr(get_all_mean())
         # maxi = 0
         # best = 0

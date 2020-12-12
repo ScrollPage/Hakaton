@@ -34,6 +34,7 @@ class DetectorListView(ListViewSet):
         detector = self.get_object()
         data = DetectorData.objects.filter(detector=detector)
         begin_date, end_date, currency = self.get_query_params_date()
+
         if request.query_params.get('every', None):
 
             @cached_as(DetectorData, extra=self.get_query_params_date()[:2])

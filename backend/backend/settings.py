@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
     'client',
     'detector',
+    'neuro',
 ]
 
 MIDDLEWARE = [
@@ -234,3 +235,15 @@ CELERY_RESULT_SERILIZER = 'json'
 #Domains
 DJANGO_DOMAIN = 'http://127.0.0.1:8000'
 REACT_DOMAIN = 'http://127.0.0.1:3000'
+
+# Djoser
+
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '#',
+    'SEND_ACTIVATION_EMAIL': False,
+    'SERIALIZERS': {
+        'current_user': 'client.api.serializers.ClientMeSerializer',
+    },
+}
