@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Container from "@/components/UI/Container";
 import Head from "next/head";
 import ControlLayout from "@/components/Layout/ControlLayout";
-import cookies from "next-cookies";
 import Image from "next/image";
 import { SButton } from "@/components/UI/Button";
 import { useDispatch } from "react-redux";
@@ -52,6 +51,7 @@ const Sucure = ({}: SucureProps) => {
               <Text>{email}</Text>
             </Info>
           </Main>
+          <Donate></Donate>
         </Wrapper>
       </Container>
     </ControlLayout>
@@ -90,6 +90,8 @@ const Wrapper = styled.div`
   }
 `;
 
+export const Donate = styled.div``;
+
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -111,6 +113,9 @@ export const Subtitle = styled.div`
   color: #000000;
   margin-bottom: 14px;
 `;
+
+export const Body = styled.div``;
+
 export const Info = styled.div`
   margin-left: 87px;
 `;
