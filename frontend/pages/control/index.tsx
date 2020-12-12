@@ -1,4 +1,3 @@
-import { instanceWithSSR } from "@/api";
 import { IDetector } from "@/types/detector";
 import { ensureAuth } from "@/utils.ts/ensure";
 import { GetServerSideProps } from "next";
@@ -9,9 +8,8 @@ import Container from "@/components/UI/Container";
 import Head from "next/head";
 import ErrorMessage from "@/components/UI/ErrorMessage";
 import { Detector } from "@/components/Detector";
-import { SButton } from "@/components/UI/Button";
 import { show } from "@/store/actions/alert";
-import { getDate } from "@/store/selectors";
+import { getDate, getBeginDate } from "@/store/selectors";
 import { nextDate } from "@/store/actions/date";
 import Cookie from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,11 +41,13 @@ const renderDetectors = (detectors: IDetector[]) => {
 
 const Control = ({}: ControlProps) => {
   const date = useSelector(getDate);
+  const begin = useSelector(getBeginDate);
   const dispatch = useDispatch();
 
   useEffect(() => {
     Cookie.set("date", String(date));
-  }, [date]);
+    Cookie.set("begin", String(begin));
+  }, [date, begin]);
 
   const changeDate = () => {
     if (date === new Date("2054-12-31")) {
@@ -65,8 +65,8 @@ const Control = ({}: ControlProps) => {
   };
 
   // const recurs = () => {
-  //   setTimeout(() => recurs(), 15 * 1000);
-  //   dispatch(nextDate());
+  //   setTimeout(() => recurs(), 1 * 1000);
+  //   changeDate();
   // };
 
   // useEffect(() => {
@@ -84,10 +84,10 @@ const Control = ({}: ControlProps) => {
       <Container>
         <Wrapper>
           <Head>
-            <title>Управление</title>
+            <title>Теплицы</title>
           </Head>
           <Header>
-            <Title>Управление</Title>
+            <Title>Теплицы</Title>
           </Header>
           <Text>Данные на {formatDate(date)}</Text>
           <Main>
@@ -112,7 +112,6 @@ export const getServerSideProps: GetServerSideProps<ControlProps> = async (
   ctx
 ) => {
   ensureAuth(ctx);
-
   return {
     props: {},
   };
@@ -167,13 +166,4 @@ const Main = styled.div`
   @media (max-width: 1199.98px) {
     flex-direction: column;
   }
-`;
-
-const Num = styled.div`
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 44px;
-  color: #000000;
 `;

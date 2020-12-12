@@ -40,18 +40,45 @@ const Sucure = ({}: SucureProps) => {
               Изменить информацию
             </SButton>
           </Header>
+          <UnderHeader>
+            <Contact>
+              <FaceCircle>
+                <Image src="/control/user.svg" height={138} width={138} />
+              </FaceCircle>
+              <Info>
+                <Subtitle>
+                  {firstName} {lastName}
+                </Subtitle>
+                <Text>{email}</Text>
+              </Info>
+            </Contact>
+            <Detector>
+              <DetectorText>Всего теплиц: 5</DetectorText>
+              <Circles>
+                <Circle color="#60CFBF">2</Circle>
+                <Circle color="#CFBD60">1</Circle>
+                <Circle color="#CF6060">2</Circle>
+              </Circles>
+            </Detector>
+          </UnderHeader>
           <Main>
-            <Circle>
-              <Image src="/control/user.svg" height={138} width={138} />
-            </Circle>
-            <Info>
-              <Subtitle>
-                {firstName} {lastName}
-              </Subtitle>
-              <Text>{email}</Text>
-            </Info>
+            <Users>
+              <UserText>
+                Кол-во сотрудников: <span>12</span>
+              </UserText>
+              <UserText>
+                Прогнозируемая урожайность: <br /> <span>меньше идеальной</span>
+              </UserText>
+            </Users>
+            <Buy>
+              <BuyText>
+                Покупка автоматической системы управления показателями почвы{" "}
+              </BuyText>
+              <SButton myType="orange" small>
+                Купить
+              </SButton>
+            </Buy>
           </Main>
-          <Donate></Donate>
         </Wrapper>
       </Container>
     </ControlLayout>
@@ -90,12 +117,74 @@ const Wrapper = styled.div`
   }
 `;
 
-export const Donate = styled.div``;
+export const Main = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 35px;
+`;
+
+export const Users = styled.div`
+  width: 400px;
+  height: 201px;
+  padding: 45px 44px;
+  background: #ffffff;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+`;
+
+export const Buy = styled.div`
+  width: 575px;
+  height: 201px;
+  padding: 37px 44px;
+  background: #ffffff;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const DetectorText = styled.div`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000;
+`;
+
+export const UnderHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
 
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+export const BuyText = styled.div`
+  font-family: Play;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000;
+  margin-bottom: 26px;
+`;
+
+export const UserText = styled.div`
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 26px;
+  color: #000000;
+  margin-bottom: 24px;
+  > span {
+    font-weight: 800;
+  }
+`;
+
 export const Text = styled.div`
   font-family: Raleway;
   font-style: normal;
@@ -114,19 +203,40 @@ export const Subtitle = styled.div`
   margin-bottom: 14px;
 `;
 
-export const Body = styled.div``;
+export const Circle = styled.div<{ color: string }>`
+  margin-right: 26px;
+  height: 44px;
+  width: 44px;
+  border-radius: 50%;
+  background-color: ${({ color }) => color};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Play;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: #ffffff;
+`;
+export const Circles = styled.div`
+  margin-top: 26px;
+  display: flex;
+  justify-content: flex-end;
+`;
+export const Detector = styled.div``;
 
 export const Info = styled.div`
   margin-left: 87px;
 `;
 
-export const Main = styled.div`
+export const Contact = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
 `;
 
-export const Circle = styled.div`
+export const FaceCircle = styled.div`
   overflow: hidden;
   height: 186px;
   width: 186px;

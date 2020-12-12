@@ -1,4 +1,3 @@
-import { IDetector } from "@/types/detector";
 import { ensureAuth } from "@/utils.ts/ensure";
 import { GetServerSideProps } from "next";
 import React from "react";
@@ -20,12 +19,21 @@ const renderUsers = (users: IUser[]) => {
 const Users = ({}: UsersProps) => {
   const users: IUser[] = [
     {
-      firstName: "Вова",
-      lastName: "Шаплин",
+      firstName: "Ярослав",
+      lastName: "Парошин",
       about: {
         number: 89969494216,
         email: "0r20@mail.ru",
-        position: "Дизайнер",
+        position: "Лидер, product manager",
+      },
+    },
+    {
+      firstName: "Михаил",
+      lastName: "Гурбанов",
+      about: {
+        number: 89969494216,
+        email: "0r20@mail.ru",
+        position: "Back - end, машинное обучение",
       },
     },
     {
@@ -34,12 +42,12 @@ const Users = ({}: UsersProps) => {
       about: {
         number: 89969494216,
         email: "0r20@mail.ru",
-        position: "Дизайнер",
+        position: "Front - end",
       },
     },
     {
-      firstName: "Вова",
-      lastName: "Шаплин",
+      firstName: "Андрей",
+      lastName: "Осипов",
       about: {
         number: 89969494216,
         email: "0r20@mail.ru",
@@ -47,21 +55,12 @@ const Users = ({}: UsersProps) => {
       },
     },
     {
-      firstName: "Вова",
-      lastName: "Шаплин",
+      firstName: "Анна",
+      lastName: "Пискарева",
       about: {
         number: 89969494216,
         email: "0r20@mail.ru",
-        position: "Дизайнер",
-      },
-    },
-    {
-      firstName: "Вова",
-      lastName: "Шаплин",
-      about: {
-        number: 89969494216,
-        email: "0r20@mail.ru",
-        position: "Дизайнер",
+        position: "Дизайнер, аналитик",
       },
     },
   ];
@@ -71,9 +70,9 @@ const Users = ({}: UsersProps) => {
       <Container>
         <Wrapper>
           <Head>
-            <title>Сотрудники</title>
+            <title>Команда</title>
           </Head>
-          <Title>Сотрудники</Title>
+          <Title>Команда</Title>
           <Main>{renderUsers(users)}</Main>
         </Wrapper>
       </Container>
