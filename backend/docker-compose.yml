@@ -3,7 +3,7 @@ version: '3'
 services:
 
   nginx:
-    container_name: nginx
+    container_name: hakaton_nginx
     build: ./nginx
     ports:
       - 8000:80
@@ -13,17 +13,17 @@ services:
       - static_volume:/home/app/web/staticfiles
 
   db:
-    container_name: postgres
+    container_name: hakaton_postgres
     image: postgres:13.0
     volumes: 
       - pg_data:/var/lib/postgresql/data/
     environment: 
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=pass
+      - POSTGRES_PASSWORD=postgres
       - POSTGRES_db=postgres
 
   redis:
-    container_name: redis
+    container_name: hakaton_redis
     image: redis
     ports:
       - "6379:6379"
@@ -32,7 +32,7 @@ services:
     restart: always
 
   web:
-    container_name: web
+    container_name: hakaton_web
     build:
       context: ./
       dockerfile: Dockerfile
@@ -51,5 +51,3 @@ volumes:
   pg_data:
   static_volume:
   redis_data:
-  influxdb:
-  grafana:

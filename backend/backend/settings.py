@@ -151,7 +151,8 @@ CORS_ORIGIN_WHITELIST = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # REST FRAMEWORK
 REST_FRAMEWORK = {
@@ -202,7 +203,7 @@ EMAIL_PORT = 587
 
 # REDIS related settings
 REDIS_HOST = '127.0.0.1' 
-# os.environ.get('REDIS_HOST', default='127.0.0.1'),
+# REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
 # Cacheops
