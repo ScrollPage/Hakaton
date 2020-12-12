@@ -15,17 +15,34 @@ import { Select, DatePicker } from "antd";
 import moment from "moment";
 import { SButton } from "@/components/UI/Button";
 import { Donat } from "@/components/Donat";
+import { useSelector } from "react-redux";
 const { Option } = Select;
 const { RangePicker } = DatePicker;
+import { getDate } from "@/store/selectors";
 
 interface ControlDataProps {}
 
+function formatDate(date: Date) {
+  let dd = date.getDate();
+  // @ts-ignore
+  if (dd < 10) dd = "0" + dd;
+
+  let mm = date.getMonth() + 1;
+  // @ts-ignore
+  if (mm < 10) mm = "0" + mm;
+
+  let yy = date.getFullYear();
+
+  return yy + "-" + mm + "-" + dd;
+}
+
 const ControlData = ({}: ControlDataProps) => {
   const { query, push } = useRouter();
-  const [data, setData] = useState(["2052-01-01", "2052-12-01"]);
-  const [currency, setCurrency] = useState("30");
+  const [currency, setCurrency] = useState("1");
   type IParam = "temp" | "humidity" | "lightning" | "pH";
-  const [index, setIndex] = useState<IParam>("temp");
+  const [index, setIndex] = useState<IParam>("pH");
+  const date = useSelector(getDate);
+  const [data, setData] = useState(["2052-01-01", formatDate(date)]);
 
   const { data: detectorData, error } = useSWR(
     `/api/detector/${query.ID}?begin_date=${data[0]}&end_date=${data[1]}&currency=${currency}`
@@ -57,6 +74,10 @@ const ControlData = ({}: ControlDataProps) => {
         return "Кислотность";
     }
   };
+
+  function disabledDate(current: any) {
+    return current && current > date;
+  }
 
   return (
     <ControlLayout>
@@ -94,9 +115,10 @@ const ControlData = ({}: ControlDataProps) => {
             <Settings>
               <MySelect>
                 <RangePicker
+                  disabledDate={disabledDate}
                   defaultValue={[
                     moment("2052-01-01", dateFormat),
-                    moment("2052-12-01", dateFormat),
+                    moment(formatDate(date), dateFormat),
                   ]}
                   format={dateFormat}
                   onChange={dataChange}

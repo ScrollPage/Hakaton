@@ -58,10 +58,10 @@ const Control = ({}: ControlProps) => {
     }
   };
 
-  const plusDate = () => {
-    let plusDate = new Date(date);
-    plusDate.setDate(plusDate.getDate() + 1);
-    return plusDate;
+  const minusDate = () => {
+    let newDate = new Date(date);
+    newDate.setDate(newDate.getDate() - 1);
+    return newDate;
   };
 
   // const recurs = () => {
@@ -74,8 +74,8 @@ const Control = ({}: ControlProps) => {
   // }, []);
 
   const { data: detectors, error } = useSWR(
-    `/api/detector?begin_date=${formatDate(date)}&end_date=${formatDate(
-      plusDate()
+    `/api/detector?begin_date=${formatDate(minusDate())}&end_date=${formatDate(
+      date
     )}`
   );
 

@@ -19,7 +19,7 @@ const patch = [
 ];
 
 const initialState = {
-  date: Cookie.get('date') === undefined ? new Date("2052-01-01") : new Date(Cookie.get('date') as any),
+  date: Cookie.get('date') === undefined ? new Date("2052-01-02") : new Date(Cookie.get('date') as any),
   begin: Cookie.get('begin') === undefined ? new Date("2052-01-01") : new Date(Cookie.get('begin') as any),
 };
 
