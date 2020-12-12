@@ -42,7 +42,7 @@ export const Donat: React.FC<DonatProps> = ({ detectorData, param }) => {
   return (
     <Wrapper>
       <Title>Соотношение корректных/некорректных данных</Title>
-      <Doughnut data={data} height={600} width={900} />
+      <Doughnut data={data} height={269} width={269} />
     </Wrapper>
   );
 };

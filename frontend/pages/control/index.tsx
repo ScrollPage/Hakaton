@@ -89,7 +89,7 @@ const Control = ({}: ControlProps) => {
           <Header>
             <Title>Управление</Title>
           </Header>
-          <Text>Результаты на {formatDate(date)}</Text>
+          <Text>Данные на {formatDate(date)}</Text>
           <Main>
             {error && (
               <ErrorMessage message="Ошибка вывода информации о теплицах" />
@@ -139,7 +139,7 @@ export const Header = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 69px 80px 80px 80px;
+  padding: 62px 80px 80px 80px;
   @media (max-width: 1199.98px) {
     padding: 0px 30px 80px 30px;
   }

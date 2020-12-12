@@ -57,7 +57,7 @@ export const Chart: React.FC<ChartProps> = ({ detectorData, param, label }) => {
         pointHitRadius: 10,
       },
       {
-        label: `Оптимальный`,
+        label: ` Оптимальный`,
         data: Array(detectorData.length).fill(renderIdeal(param)),
         borderColor: "#60CFBF",
         backgroundColor: "transparent",
@@ -79,7 +79,7 @@ export const Chart: React.FC<ChartProps> = ({ detectorData, param, label }) => {
         borderWidth: 10,
       },
       {
-        label: `Нижний допустимый разброс`,
+        label: `  Допустимый разброс`,
         data: Array(detectorData.length).fill(
           param === "pH" ? renderIdeal(param) * 0.95 : renderIdeal(param) * 0.9
         ),
@@ -103,7 +103,7 @@ export const Chart: React.FC<ChartProps> = ({ detectorData, param, label }) => {
         borderWidth: 10,
       },
       {
-        label: `Верхний допустимый разброс`,
+        label: ` Допустимый разброс`,
         data: Array(detectorData.length).fill(
           param === "pH" ? renderIdeal(param) * 1.05 : renderIdeal(param) * 1.1
         ),
@@ -131,8 +131,7 @@ export const Chart: React.FC<ChartProps> = ({ detectorData, param, label }) => {
 
   return (
     <Wrapper>
-      <Title>График показателя - {label}</Title>
-      <Line data={data} height={600} width={900} />
+      <Line data={data} height={600} width={700} />
     </Wrapper>
   );
 };

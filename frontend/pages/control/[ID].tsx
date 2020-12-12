@@ -65,54 +65,18 @@ const ControlData = ({}: ControlDataProps) => {
           <Head>
             <title>Данные о теплице</title>
           </Head>
-          <Title>Теплица {query.ID}</Title>
-          <SButton
-            myType="orange"
-            small
-            onClick={() =>
-              push({ pathname: "/control" }, undefined, { shallow: true })
-            }
-          >
-            Назад
-          </SButton>
+          <Header>
+            <Title>Теплица {query.ID}:</Title>
+            <SButton
+              myType="blue"
+              onClick={() =>
+                push({ pathname: "/control" }, undefined, { shallow: true })
+              }
+            >
+              Вернуться назад
+            </SButton>
+          </Header>
           <Main>
-            <MySelect>
-              <Text>От-До</Text>
-              <RangePicker
-                defaultValue={[
-                  moment("2052-01-01", dateFormat),
-                  moment("2052-12-01", dateFormat),
-                ]}
-                format={dateFormat}
-                onChange={dataChange}
-              />
-            </MySelect>
-            <MySelect>
-              <Text>Частота: </Text>
-              <Select
-                value={currency}
-                style={{ width: 200, borderRadius: "50% !important" }}
-                onChange={currencyChange}
-              >
-                <Option value="365">Год</Option>
-                <Option value="30">Месяц</Option>
-                <Option value="7">Неделя</Option>
-                <Option value="1">День</Option>
-              </Select>
-            </MySelect>
-            <MySelect>
-              <Text>Показатель: </Text>
-              <Select
-                value={index}
-                style={{ width: 200 }}
-                onChange={indexChange}
-              >
-                <Option value="temp">Температура</Option>
-                <Option value="humidity">Влажность</Option>
-                <Option value="lightning">Освещенность</Option>
-                <Option value="pH">Кислотность</Option>
-              </Select>
-            </MySelect>
             {error && (
               <ErrorMessage message="Ошибка вывода информации о датчике" />
             )}
@@ -121,15 +85,51 @@ const ControlData = ({}: ControlDataProps) => {
               <EmptyMessage message="Нет информации по датчику" />
             )}
             {detectorData && (
-              <>
-                <Chart
-                  detectorData={detectorData}
-                  param={index}
-                  label={renderLabel(index)}
-                />
-                <Donat detectorData={detectorData} param={index} />
-              </>
+              <Chart
+                detectorData={detectorData}
+                param={index}
+                label={renderLabel(index)}
+              />
             )}
+            <Settings>
+              <MySelect>
+                <RangePicker
+                  defaultValue={[
+                    moment("2052-01-01", dateFormat),
+                    moment("2052-12-01", dateFormat),
+                  ]}
+                  format={dateFormat}
+                  onChange={dataChange}
+                />
+              </MySelect>
+              <MySelect>
+                <Select
+                  value={currency}
+                  style={{ width: 278.33, borderRadius: "50% !important" }}
+                  onChange={currencyChange}
+                >
+                  <Option value="365">Год</Option>
+                  <Option value="30">Месяц</Option>
+                  <Option value="7">Неделя</Option>
+                  <Option value="1">День</Option>
+                </Select>
+              </MySelect>
+              <MySelect>
+                <Select
+                  value={index}
+                  style={{ width: 278.33 }}
+                  onChange={indexChange}
+                >
+                  <Option value="temp">Температура</Option>
+                  <Option value="humidity">Влажность</Option>
+                  <Option value="lightning">Освещенность</Option>
+                  <Option value="pH">Кислотность</Option>
+                </Select>
+              </MySelect>
+              {detectorData && (
+                <Donat detectorData={detectorData} param={index} />
+              )}
+            </Settings>
           </Main>
         </Wrapper>
       </Container>
@@ -151,13 +151,24 @@ export const getServerSideProps: GetServerSideProps<ControlDataProps> = async (
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 69px 80px 80px 80px;
+  padding: 62px 80px 80px 80px;
   @media (max-width: 1199.98px) {
     padding: 0px 30px 80px 30px;
   }
   @media (max-width: 767.98px) {
     padding: 0px 0px 80px 0px;
   }
+`;
+
+const Settings = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Title = styled.h1`
@@ -172,10 +183,8 @@ const Title = styled.h1`
 const Main = styled.div`
   flex: 1;
   display: flex;
-  flex-direction: row;
   margin-top: 30px;
   justify-content: center;
-  flex-wrap: wrap;
   @media (max-width: 1199.98px) {
     flex-direction: column;
   }
@@ -186,7 +195,7 @@ export const MySelect = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  justify-content: space-between;
+  padding-left: 54px;
 `;
 
 export const Text = styled.p`
