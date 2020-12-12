@@ -55,7 +55,7 @@ export const authLogin = (email: string, password: string): ThunkType => async d
       dispatch(checkAuthTimeout(24 * 3600 * 1000));
       dispatch(authInfo());
 
-      Router.push({ pathname: '/control' }, undefined, { shallow: true });
+      Router.push({ pathname: '/info' }, undefined, { shallow: true });
 
       dispatch(show('Вы успешно вошли!', 'success'));
     })

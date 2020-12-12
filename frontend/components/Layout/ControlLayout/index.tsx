@@ -66,6 +66,11 @@ const ControlLayout: React.FC<ControlLayoutProps> = ({ children }) => {
           </Name>
         </Rectangle>
         <Side>
+          <SideLink active={pathname === "/info"}>
+            <Link href="/info">
+              <a>Инструкция</a>
+            </Link>
+          </SideLink>
           <SideLink
             active={pathname === "/control" || pathname === "/control/[ID]"}
           >
