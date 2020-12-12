@@ -8,6 +8,7 @@ import ControlLayout from "@/components/Layout/ControlLayout";
 import Container from "@/components/UI/Container";
 import Head from "next/head";
 import ErrorMessage from "@/components/UI/ErrorMessage";
+import { Detector } from "@/components/Detector";
 
 interface ControlProps {
   detectors: IDetector[] | null;
@@ -15,13 +16,11 @@ interface ControlProps {
 
 const renderDetectors = (detectors: IDetector[]) => {
   return detectors.map((detector) => {
-    return <div>{detector.id}</div>;
+    return <Detector key={`detector__${detector.id}`} id={detector.id} />;
   });
 };
 
-const Control = ({}: ControlProps) => {
-  const detectors = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
-
+const Control = ({ detectors }: ControlProps) => {
   return (
     <ControlLayout>
       <Container>
@@ -89,7 +88,8 @@ const Main = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 30px;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
   @media (max-width: 1199.98px) {
     flex-direction: column;
   }
