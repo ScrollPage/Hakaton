@@ -96,7 +96,7 @@ class DetectorListView(ListViewSet):
 
             detectors = _get_annotation()
 
-        content = make_content(detectors, begin_date, end_date, fl)
+        content = make_content(detectors, begin_date, end_date, fl))
         send_report_email.delay(request.user.email, begin_date, end_date, content)
         serializer = self.get_serializer(detectors, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)

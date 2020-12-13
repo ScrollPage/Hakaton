@@ -98,7 +98,7 @@ def make_content(data, begin_date, end_date, fl):
     if fl:
         content = ''
         for det in data:
-            content += f'Отчет из теплицы №{det.id}\n'
+            content += f'Теплица №{det.id}:\n'
             ph_perc = round(100*det.good_pH/7, 2)
             content += f'Данные по показателю кислотности: {ph_perc}% данных попали в диапазон лучших значений!\n'
             humidity_perc = round(100*det.good_humidity/7, 2)
@@ -113,35 +113,41 @@ def make_content(data, begin_date, end_date, fl):
             if avg['pH__avg'] is not None:
                 if ph_perc < 85:
                     if float(avg['pH__avg']) < settings.NORMAL_PH:
-                        content += f"Ваша кислотность: {round(float(avg['pH__avg']), 2)}, оптимальная кислотность: {settings.NORMAL_PH}. Внесите удобрения!\n"
+                        content += f"Кислотность: {round(float(avg['pH__avg']), 2)} (Отклонение). Оптимальная кислотность: {settings.NORMAL_PH}.\n"
                     else:
-                        content += f"Ваша кислотность: {round(float(avg['pH__avg']), 2)}, оптимальная кислотность: {settings.NORMAL_PH}. Снизьте pH. К примеру, внесите известянковой муки!\n"
+                        content += f"Кислотность: {round(float(avg['pH__avg']), 2)} (Отклонение). Оптимальная кислотность: {settings.NORMAL_PH}.\n"
+                else:
+                    content += f"Кислотность: {round(float(avg['pH__avg']), 2)} (Норма)"
             else:
-                content += "Почините ваш датчик! Он не передает значения!\n"
+                content += "Необходим ремонт датчика.\n"
             if avg['humidity__avg'] is not None:
                 if humidity_perc < 85:
                     if float(avg['humidity__avg']) < settings.NORMAL_LIGHTNING:
-                        content += f"Ваша влажность: {round(float(avg['humidity__avg']), 2)}, оптимальная влажность: {settings.NORMAL_HUMIDITY}. Полейте Вашу почву!\n"
+                        content += f"Влажность: {round(float(avg['humidity__avg']), 2)} (Отклонение). Оптимальная влажность: {settings.NORMAL_HUMIDITY}.\n"
                     else:
-                        content += f"Ваша влажность: {round(float(avg['humidity__avg']), 2)}, оптимальная влажность: {settings.NORMAL_HUMIDITY}. Необходимо снизить влажность почвы!.\n"
+                        content += f"Влажность: {round(float(avg['humidity__avg']), 2)} (Отклонение). Оптимальная влажность: {settings.NORMAL_HUMIDITY}.\n"
+                else:
+                    content += f"Влажность {round(float(avg['humidity__avg']), 2)} (Норма)"
             else:
-                content += "Почините ваш датчик! Он не передает значения!\n"
+                content += "Необходим ремонт датчика.\n"
             if avg['lightning__avg'] is not None:
                 if lightning_perc < 85:
                     if float(avg['lightning__avg']) < settings.NORMAL_LIGHTNING:
-                        content += f"Ваша освещенность: {round(float(avg['lightning__avg']), 2)}, оптимальная освещенность: {settings.NORMAL_LIGHTNING}. Клубнике требуется больше света!\n"
+                        content += f"Освещенность: {round(float(avg['lightning__avg']), 2)} (Отклонение). Оптимальная освещенность: {settings.NORMAL_LIGHTNING}.\n"
                     else:
-                        content += f"Ваша освещенность: {round(float(avg['lightning__avg']), 2)}, оптимальная освещенность: {settings.NORMAL_LIGHTNING}. Снизьте освещенность!\n"
+                        content += f"Освещенность: {round(float(avg['lightning__avg']), 2)} (Отклонение). Оптимальная освещенность: {settings.NORMAL_LIGHTNING}.\n"
+                else: 
+                    content += f"Освещенность {round(float(avg['humidity__avg']), 2)} (Норма)"
             else:
-                content += "Почините ваш датчик! Он не передает значения!\n"
+                content += "Необходим ремонт датчика.\n"
             if avg['temp__avg'] is not None:
                 if temp_perc < 85:
                     if float(avg['temp__avg']) < settings.NORMAL_TEMP:
-                        content += f"Ваша температура: {round(float(avg['temp__avg']), 2)}, оптимальная температура: {settings.NORMAL_TEMP}. Повысьте температуру!\n"
+                        content += f"Температура: {round(float(avg['temp__avg']), 2)} (Отклонение). Оптимальная температура: {settings.NORMAL_TEMP}.\n"
                     else:
-                        content += f"Ваша температура: {round(float(avg['temp__avg']), 2)}, оптимальная температура: {settings.NORMAL_TEMP}. Снизьте температуру!\n"
+                        content += f"Температура: {round(float(avg['temp__avg']), 2)} (Отклонение). Оптимальная температура: {settings.NORMAL_TEMP}.\n"
             else:
-                content += "Почините ваш датчик! Он не передает значения!\n"
+                content += "Необходим ремонт датчика.\n"
             content += '\n\n'
     else:
         content = 'С Вашими теплицами все в полном порядке!\n Мы поддерживаем Ваши данные в пределах нормы.'
