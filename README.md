@@ -28,7 +28,7 @@ If you run on docker:
 ```
 
 If you want to run by runserver:
-1) You need Python 3.*.*
+1) You need Python `3.*.*`
 2) You need to have your Docker installed
 ```bash
 3) python -m pip install –upgrade pip
