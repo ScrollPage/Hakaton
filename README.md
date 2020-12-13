@@ -25,6 +25,10 @@ If you run on docker:
 ```bash
 2) cd backend
 3) docker-compose up
+4) docker-compose -f docker-compose.yml exec web bash
+5) python manage.py upload_data sensor_daat.csv
+6) python manage.py regress
+7) celery -A backend worker --pool=solo -l info
 ```
 
 !!!Warning!!!
