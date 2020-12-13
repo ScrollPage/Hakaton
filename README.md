@@ -25,7 +25,14 @@ If you run on docker:
 ```bash
 2) cd backend
 3) docker-compose up
+4) docker-compose -f docker-compose.yml exec web bash
+5) python manage.py upload_data sensor_daat.csv
+6) python manage.py regress
+7) celery -A backend worker --pool=solo -l info
 ```
+
+!!!Warning!!!
+It may take 15-20 minutes to lift the container up
 
 If you want to run by runserver:
 1) You need Python `3.*.*`
@@ -46,6 +53,5 @@ If you want to run by runserver:
 ```
 Do not forget to specify your PostgreSQL password in backend.settings! (Database section)
 And set the Reds host to `127.0.0.1` backend.settings uncomment line 206 and comment line 207
-
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

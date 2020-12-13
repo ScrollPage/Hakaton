@@ -23,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'q%oykzzv&wl(gg(=i5um(f-z!!^&-pm2dm_fmi-v1$_0xa9pkk'
+SECRET_KEY = os.environ.get('SECRET_KEY', '123713761327671alksdakjdjka7fd*D8gsd7vs92378')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.environ.get('DEBUG', 1)))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '127.0.0.1 localhost').split(' ')
 
 
 # Application definition
@@ -146,7 +146,11 @@ AUTH_USER_MODEL = 'client.Client'
 # CORS
 CORS_ORIGIN_WHITELIST = (
     u'http://127.0.0.1:3000',
-    u'http://localhost:3000'
+    u'http://localhost:3000',
+    u'https://185.114.247.197',
+    u'https://mars-berry.ru',
+    u'http://185.114.247.197',
+    u'http://mars-berry.ru'
 )
 
 # Static files (CSS, JavaScript, Images)
@@ -203,8 +207,8 @@ EMAIL_HOST_PASSWORD = 'CFHFYXF228hec;$' #os.environ.get('EMAIL_HOST_PASSWORD', l
 EMAIL_PORT = 587
 
 # REDIS related settings
-REDIS_HOST = '127.0.0.1' 
-# REDIS_HOST = 'redis'
+# REDIS_HOST = '127.0.0.1' 
+REDIS_HOST = 'redis'
 REDIS_PORT = 6379
 
 # Cacheops
