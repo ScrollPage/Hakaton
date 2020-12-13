@@ -44,7 +44,8 @@ If you want to run by runserver:
 12) docker run -d --name=<name> -p 5432:5432 -e POSTGRES_PASSWORD=<password> -e PGDATA=/pgdata -v /pgdata:/pgdata postgres
 13) python manage.py runserver
 ```
-Do not forget to specify your PostgreSQL password in backend.settings!
+Do not forget to specify your PostgreSQL password in backend.settings! (Database section)
+And set the Reds host to `127.0.0.1` backend.settings uncomment line 206 and comment line 207
 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
