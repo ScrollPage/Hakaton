@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,6 @@
     <title>{{ title }}</title>
 </head>
 <body>
-    {{ content }}
+    {{ content|linebreaksbr }}
 </body>
 </html>

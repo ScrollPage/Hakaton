@@ -16,5 +16,8 @@ python manage.py flush --no-input
 python manage.py makemigrations
 python manage.py migrate
 # python manage.py collectstatic 
+# python manage.py upload_data sensor_data.csv
+# python manage.py regress
+# celery -A backend worker --pool=solo -l info
 
 exec "$@"
