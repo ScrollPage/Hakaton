@@ -23,9 +23,6 @@ export const Home = () => {
             Поможем наладить процесс выращивания <br />
             марсианской клубники из любой точки вселенной
           </Subtitle>
-          <SButton myType="orange" small>
-            Узнать как
-          </SButton>
         </Content>
       </Container>
       <Strawberry>

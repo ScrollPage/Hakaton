@@ -18,6 +18,7 @@ import LoadingSpinner from "@/components/UI/LoadingSpinner";
 import EmptyMessage from "@/components/UI/EmptyMessage";
 import Link from "next/link";
 import { useUser } from "@/hooks/useUser";
+import { SButton } from "@/components/UI/Button";
 
 interface ControlProps {}
 
@@ -72,13 +73,13 @@ const Control = ({}: ControlProps) => {
   };
 
   const recurs = () => {
-    setTimeout(() => recurs(), 6 * 1000);
+    setTimeout(() => recurs(), 10 * 1000);
     changeDate();
   };
 
-  useEffect(() => {
-    recurs();
-  }, []);
+  // useEffect(() => {
+  //   recurs();
+  // }, []);
 
   const newPredict = useMemo(
     () => getRandom(16.33 * 0.85, 16.33 * 0.95).toFixed(2),
@@ -99,35 +100,39 @@ const Control = ({}: ControlProps) => {
 
   return (
     <ControlLayout>
-      <Container>
-        <Wrapper>
-          <Head>
-            <title>Теплицы</title>
-          </Head>
-          <Header>
-            <Title>Теплицы</Title>
-          </Header>
-          <Text>Данные на {formatDate(date)}</Text>
-          <Text>
-            Ожидаемый урожай на текущий квартал&nbsp;
-            {isBuy ? newPredict : predict?.answer}
-          </Text>
-          <Text>Максимально возможный урожай на текущий квартал 16.33</Text>
-          <Link href="/service">
-            <a>Мы можем вам помочь увеличить урожай!</a>
-          </Link>
-          <Main>
-            {error && (
-              <ErrorMessage message="Ошибка вывода информации о теплицах" />
-            )}
-            {!detectors && !error && <LoadingSpinner />}
-            {detectors?.length === 0 && (
-              <EmptyMessage message="Нет информации по теплицам" />
-            )}
-            {detectors && renderDetectors(detectors)}
-          </Main>
-        </Wrapper>
-      </Container>
+      <Bgc>
+        <Container>
+          <Float>
+            <Title>Данные на {formatDate(date)}</Title>
+            <Text>
+              Ожидаемый урожай на текущий квартал&nbsp;
+              {isBuy ? newPredict : predict?.answer}
+            </Text>
+            <Text>При этом максимально возможный 16.33</Text>
+            <Bottom>
+              <Text>Мы можем вам помочь увеличить урожай!</Text>
+              <SButton myType="blue" small>
+                Перейти
+              </SButton>
+            </Bottom>
+          </Float>
+          <Wrapper>
+            <Head>
+              <title>Теплицы</title>
+            </Head>
+            <Main>
+              {error && (
+                <ErrorMessage message="Ошибка вывода информации о теплицах" />
+              )}
+              {!detectors && !error && <LoadingSpinner />}
+              {detectors?.length === 0 && (
+                <EmptyMessage message="Нет информации по теплицам" />
+              )}
+              {detectors && renderDetectors(detectors)}
+            </Main>
+          </Wrapper>
+        </Container>
+      </Bgc>
     </ControlLayout>
   );
 };
@@ -143,15 +148,44 @@ export const getServerSideProps: GetServerSideProps<ControlProps> = async (
   };
 };
 
-export const Text = styled.div`
-  font-family: Raleway;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 28px;
-  color: #000000;
+export const Bgc = styled.div`
+  width: 100%;
+  background: url("/control/bgc.png") no-repeat #000;
+  background-size: cover;
+  height: clac(100vh - 120px);
+  overflow: hidden;
 `;
 
+export const Text = styled.div`
+  font-family: Play;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #000000;
+  margin-top: 4px;
+`;
+
+export const Bottom = styled.div`
+  display: flex;
+  margin-top: 18px;
+  align-items: center;
+  justify-content: space-between;
+  ${Text} {
+    margin-right: 16px;
+  }
+`;
+
+export const Float = styled.div`
+  position: absolute;
+  right: 40px;
+  bottom: 50px;
+  z-index: 2;
+  background: #ffffff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  padding: 14px 41px;
+`;
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -165,6 +199,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 62px 80px 80px 80px;
+  position: relative;
   @media (max-width: 1199.98px) {
     padding: 0px 30px 80px 30px;
   }
@@ -177,8 +212,8 @@ const Title = styled.h1`
   font-family: Play;
   font-style: normal;
   font-weight: bold;
-  font-size: 48px;
-  line-height: 56px;
+  font-size: 18px;
+  line-height: 21px;
   color: #000000;
 `;
 
@@ -189,6 +224,7 @@ const Main = styled.div`
   margin-top: 90px;
   justify-content: center;
   flex-wrap: wrap;
+  margin-left: 100px;
   @media (max-width: 1199.98px) {
     flex-direction: column;
   }

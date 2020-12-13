@@ -20,10 +20,10 @@ export const UseFul = () => {
           <Main>
             <Title>Кому это полезно?</Title>
             <TextBlock>
-              <Text>- Один из видов</Text>
-              <Text>- Один из видов</Text>
-              <Text>- Один из видов</Text>
-              <Text>- Один из видов</Text>
+              <Text>- Уважающим себя марсо-дачникам</Text>
+              <Text>- Ассоциации Растениеводства Вселенной</Text>
+              <Text>- Содружеству марсианских фермеров</Text>
+              <Text>- Илону Маску</Text>
             </TextBlock>
           </Main>
           <ImageWrapper>

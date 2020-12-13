@@ -33,6 +33,18 @@ export const SideBar = styled.div`
 `
 
 export const Side = styled.div``
+export const Title = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-family: Play;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 56px;
+  color: #FFFFFF;
+`
 
 export const NavLink = styled.div`
  > a {
@@ -103,6 +115,7 @@ export const Nav = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  position: relative;
 `
 
 export const NavContainer = styled.div`

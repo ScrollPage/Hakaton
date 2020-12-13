@@ -1,8 +1,18 @@
 import React, { useState } from "react";
-import { Wrapper, Text, Info, Num, Circle, Box, Index } from "./styles";
+import {
+  Wrapper,
+  Text,
+  Info,
+  Num,
+  Circle,
+  Box,
+  Index,
+  MyImage,
+} from "./styles";
 import Link from "next/link";
 import { IDetector } from "@/types/detector";
 import { useUser } from "@/hooks/useUser";
+import Image from "next/image";
 
 const checkGoods = (good: number, isBuy: boolean) => {
   if (isBuy) {
@@ -23,9 +33,12 @@ export const Detector: React.FC<{ detector: IDetector }> = ({ detector }) => {
 
   return (
     <Wrapper>
-      <Link href={`/control/${detector.id}`}>
+      {/* <Link href={`/control/${detector.id}`}>
         <a>Данные</a>
-      </Link>
+      </Link> */}
+      <MyImage>
+        <Image src="/main/detector.png" height={400} width={500} />
+      </MyImage>
       <Info>
         <Box
           onMouseOver={() => setActive(true)}

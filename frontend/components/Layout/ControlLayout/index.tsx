@@ -12,6 +12,7 @@ import {
   SideBar,
   Circle,
   NavContainer,
+  Title,
 } from "./styles";
 import { useUser } from "@/hooks/useUser";
 import Image from "next/image";
@@ -33,6 +34,7 @@ const ControlLayout: React.FC<ControlLayoutProps> = ({ children }) => {
     <>
       <Header>
         <Nav>
+          <Title>Теплицы</Title>
           <NavContainer>
             <Link href="/">
               <a>

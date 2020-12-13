@@ -10,9 +10,9 @@ export const Text = styled.div`
 `;
 
 export const Index = styled.div`
-  background: #F5F9FF;
+  background: #FFF;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.08);
-  border-radius: 20px;
+  border-radius: 0px 20px 20px 0;
   height: 95px;
   width: 95px;
   display: flex;
@@ -24,9 +24,10 @@ export const Index = styled.div`
 
 export const Info = styled.div`
   position: absolute;
-  top: -50px;
+  top: -150px;
   left: -50px;
   display: flex;
+  z-index: 2;
 `
 export const Circle = styled.div<{ index: number, good: string }>`
   position: absolute;
@@ -50,7 +51,7 @@ export const Circle = styled.div<{ index: number, good: string }>`
 `
 
 export const Box = styled.div`
-  background: #F5F9FF;
+  background: #FFF;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.08);
   border-radius: 20px;
   height: 95px;
@@ -60,6 +61,8 @@ export const Box = styled.div`
   align-items: center;
   position: relative;
   cursor: pointer;
+  border-radius: 20px 0px 0px 20px;
+
 `
 export const Num = styled.div`
   font-family: Montserrat;
@@ -70,17 +73,20 @@ export const Num = styled.div`
   color: #000000;
 `
 
+export const MyImage = styled.div`
+  position: absolute;
+  height: 400px;
+  width: 500px;
+`
+
 export const Wrapper = styled.div`
   position: relative;
   padding: 40px 0;
-  background: #FFFFFF;
-  border: 1px solid #ccc;
-  box-shadow: 0px 0px 20px rgba(232, 105, 0, 0.08);
-  border-radius: 20px;
-  width: 200px;
+  width: 250px;
   display: flex;
   justify-content: center; 
   align-items: center;
   flex-direction: column;
-  margin: 20px;
+  margin: 100px 20px 150px 20px;
+
 `;

@@ -1,4 +1,5 @@
 import Container from "@/components/UI/Container";
+import { MyPartic } from "@/components/UI/MyPartic";
 import Image from "next/image";
 import React from "react";
 import { Wrapper, MyImage, Title, Text, Inner, Strawberry } from "./styles";
@@ -6,13 +7,18 @@ import { Wrapper, MyImage, Title, Text, Inner, Strawberry } from "./styles";
 export const HowWeDo = () => {
   return (
     <Wrapper>
+      <MyPartic />
       <Container>
         <Inner>
           <Title>Как мы это сделаем?</Title>
+          <Text>- Установим датчики климата теплицы</Text>
+          <Text>- Подключим их к системе MarsBerry Tracker</Text>
           <Text>
-            C помощью, разработанной нами, нейросети составим идеальный график
-            полива и добавления удобрений, который поможет вам правильно
-            ухаживать за вашей клубникой
+            - На основе алгоритмов машинного обучения проанализируем собранные
+            данные
+          </Text>
+          <Text>
+            - Дадим рекомендации о том, как сделать ваш урожай идеальным
           </Text>
         </Inner>
       </Container>

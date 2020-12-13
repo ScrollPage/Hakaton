@@ -9,7 +9,7 @@ export const Strawberry = styled.div`
 
 export const Wrapper = styled.div`
   height: 100vh;
-  background-color: ${({ theme }) => theme.lightBlue};
+  /* background-color: ${({ theme }) => theme.lightBlue}; */
   position: relative;
   padding: 209px 0 269px 0;
   ${Strawberry} {
@@ -21,6 +21,13 @@ export const Wrapper = styled.div`
       transform: scale(-1, 1)
     }
   }
+  #tsparticles {
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
 `;
 
 export const Title = styled.div`
@@ -30,6 +37,7 @@ export const Title = styled.div`
   font-size: 70px;
   line-height: 140px;
   color: #000000;
+  margin-bottom: 100px;
 `;
 
 export const Text = styled.div`
@@ -40,7 +48,7 @@ export const Text = styled.div`
   line-height: 40px;
   width: 60%;
   align-self: flex-end;
-  text-indent: 40px;
+  margin-bottom: 20px;
 `;
 
 export const Inner = styled.div`

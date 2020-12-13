@@ -65,7 +65,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                   Кабинет
                 </SButton>
                 <SButton
-                  myType="white"
+                  myType="orange"
                   small
                   onClick={() => dispatch(logout(true))}
                 >
@@ -97,11 +97,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
               </>
             )}
           </AuthButtons>
-          <Nav>
-            <NavLink>Как это работает</NavLink>
-            <NavLink>Кому подойдет</NavLink>
-            <NavLink>Команда</NavLink>
-          </Nav>
         </Inner>
       </Header>
       <Main>{children}</Main>

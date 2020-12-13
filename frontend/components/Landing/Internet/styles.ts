@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   padding-top: 163px;
+  padding-bottom: 100px;
 `;
 export const Title = styled.div`
   font-family: "Rosalinda";
