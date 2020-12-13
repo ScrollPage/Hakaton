@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Header = styled.div<{ small: boolean }>`
   top: 0;
@@ -11,10 +11,13 @@ export const Header = styled.div<{ small: boolean }>`
   justify-content: space-between;
   align-items: flex-start;
   z-index: 4;
-  color: ${({ small }) => small ? "#000000" : "#FFFFFF"};
+  color: #fff;
   a {
-    color: ${({ small }) => small ? "#000000" : "#FFFFFF"};
+    color: #fff;
   }
+  /* ${({ small }) => small && css` */
+    /* background: rgba(255, 255, 255, 0.2); */
+  /* `} */
 `;
 export const Info = styled.div`
   display: flex;

@@ -1,6 +1,6 @@
 import { ensureAuth } from "@/utils.ts/ensure";
 import { GetServerSideProps } from "next";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Container from "@/components/UI/Container";
 import Head from "next/head";
@@ -17,8 +17,11 @@ interface SucureProps {}
 
 const Sucure = ({}: SucureProps) => {
   const dispatch = useDispatch();
-  const { firstName, lastName, email } = useUser();
+  const { firstName, lastName, email, isBuy } = useUser();
   const { push } = useRouter();
+
+  const [check1, setCheck1] = useState(false);
+  const [check2, setCheck2] = useState(false);
 
   const showHandler = () => {
     dispatch(
@@ -89,6 +92,22 @@ const Sucure = ({}: SucureProps) => {
               </SButton>
             </Buy>
           </Main>
+          <Checks>
+            <Check act={check1}>
+              <Box onClick={() => setCheck1((e) => !e)} />
+              <CheckText>Уведомления в телеграмм</CheckText>
+            </Check>
+            <Check act={check2}>
+              <Box onClick={() => setCheck2((e) => !e)} />
+              <CheckText>Письма на электронную почту</CheckText>
+            </Check>
+            <Check act={isBuy}>
+              <Box disabled />
+              <CheckText2>
+                Автоматическая корректировка микроклимата частиц
+              </CheckText2>
+            </Check>
+          </Checks>
         </Wrapper>
       </Container>
     </ControlLayout>
@@ -106,6 +125,45 @@ export const getServerSideProps: GetServerSideProps<SucureProps> = async (
   };
 };
 
+const Box = styled.div<{ disabled?: boolean }>`
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  height: 31px;
+  width: 31px;
+  margin-right: 22px;
+  cursor: pointer;
+  ${({ disabled }) =>
+    disabled && "background: #b3b3b3 !important; cursor: auto;"}
+`;
+
+const Check = styled.div<{ act?: boolean }>`
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  ${Box} {
+    background-color: ${({ act, theme }) => (act ? theme.green : "#FFF")};
+  }
+`;
+const Checks = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const CheckText = styled.div`
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #000000;
+`;
+const CheckText2 = styled.div`
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #b3b3b3;
+`;
 const Title = styled.h1`
   font-family: Play;
   font-style: normal;
@@ -130,7 +188,7 @@ const Wrapper = styled.div`
 export const Main = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 35px;
+  margin: 35px 0;
 `;
 
 export const Users = styled.div`

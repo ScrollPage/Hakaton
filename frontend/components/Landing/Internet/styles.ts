@@ -2,6 +2,16 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   padding-top: 163px;
+  padding-bottom: 100px;
+  background-color: #000;
+  position: relative;
+  #tsparticles {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
 `;
 export const Title = styled.div`
   font-family: "Rosalinda";
@@ -9,7 +19,7 @@ export const Title = styled.div`
   font-weight: normal;
   font-size: 70px;
   line-height: 140px;
-  color: #000000;
+  color: #fff;
   margin-bottom: 32px;
 `;
 export const Inner = styled.div`

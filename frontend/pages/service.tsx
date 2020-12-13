@@ -1,6 +1,6 @@
 import { ensureAuth } from "@/utils.ts/ensure";
 import { GetServerSideProps } from "next";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Container from "@/components/UI/Container";
 import Head from "next/head";
@@ -18,6 +18,7 @@ interface ServiceProps {}
 const Service = ({}: ServiceProps) => {
   const dispatch = useDispatch();
   const { isBuy } = useUser();
+  const [active, setActive] = useState(0);
 
   const showHandler = () => {
     dispatch(modalShow<IBuyServiceModalProps>("BUY_SERVICE_MODAL", {}));
@@ -43,10 +44,16 @@ const Service = ({}: ServiceProps) => {
           <Title>Дополнительные услуги</Title>
           <Main>
             <Items>
-              <Item>
+              <Item onClick={() => setActive(0)}>
                 <ItemText>
                   Автоматизация управления климата и почвы теплиц
                 </ItemText>
+              </Item>
+              <Item onClick={() => setActive(1)}>
+                <ItemText>Больше датчиков</ItemText>
+              </Item>
+              <Item onClick={() => setActive(2)}>
+                <ItemText>Внедрение Гидропоники/Аэропоники</ItemText>
               </Item>
               <Title>...</Title>
               <SubSubtitle>Скоро тут появятся новые услуги</SubSubtitle>
@@ -57,23 +64,60 @@ const Service = ({}: ServiceProps) => {
               ) : (
                 <>
                   <Subtitle>Вы получите</Subtitle>
-                  <SubSubtitle>- Максимальную урожайность</SubSubtitle>
-                  <Text>
-                    Теперь Ваша клубника под круглосуточным <br />
-                    надзором. При любом отклонении система <br />
-                    скорректирует его так, чтобы условия были <br />
-                    оптимальными.
-                  </Text>
-                  <SubSubtitle>- Экономию времени</SubSubtitle>
-                  <Text>
-                    Ведь теперь Вам не нужно ходить и <br /> проверять, все ли в
-                    порядке, а также тратить <br /> время на полив и внесение
-                    удобрений.
-                  </Text>
-                  <SubSubtitle>- Контроль из любой точки Вселенной</SubSubtitle>
-                  <SButton onClick={showHandler} myType="orange">
-                    Оформить подписку
-                  </SButton>
+                  {active === 1 && (
+                    <>
+                      <SubSubtitle>
+                        - Возможность анализировать и влиять на еще больший
+                        спектр параметров, таких как содержание С02, влажность
+                        воздуха и др.
+                      </SubSubtitle>
+                      <SubSubtitle>
+                        - Еще лучше урожайность и качество! Ведь клубничка любит
+                        СО2 и влагу!
+                      </SubSubtitle>
+                      <SButton myType="orange">Оформить подписку</SButton>
+                    </>
+                  )}
+                  {active === 0 && (
+                    <>
+                      <SubSubtitle>- Максимальную урожайность</SubSubtitle>
+                      <Text>
+                        Теперь Ваша клубника под круглосуточным <br />
+                        надзором. При любом отклонении система <br />
+                        скорректирует его так, чтобы условия были <br />
+                        оптимальными.
+                      </Text>
+                      <SubSubtitle>- Экономию времени</SubSubtitle>
+                      <Text>
+                        Ведь теперь Вам не нужно ходить и <br /> проверять, все
+                        ли в порядке, а также тратить <br /> время на полив и
+                        внесение удобрений.
+                      </Text>
+                      <SubSubtitle>
+                        - Рентабельность около 65%, окупаемость через полтора
+                        года
+                      </SubSubtitle>
+                      <SButton onClick={showHandler} myType="orange">
+                        Оформить подписку
+                      </SButton>
+                    </>
+                  )}
+                  {active === 2 && (
+                    <>
+                      <SubSubtitle>
+                        - Инновационные системы, позволяющие подводить удобрения
+                        прямо к корням. Повышение стерильности питательной
+                        среды, простота в уходе и новые уровни урожайности,
+                        недостижимые при выращивании на почве!{" "}
+                      </SubSubtitle>
+                      <Text>
+                        Окупаемость гидропонной системы от половины года,
+                        рентабельность до 40% Окупаемость аэропонной системы от
+                        17 месяцев, рентабельность 150%
+                      </Text>
+                      <SButton myType="orange">Оформить подписку</SButton>
+                    </>
+                  )}
                 </>
               )}
             </Block>
@@ -102,6 +146,7 @@ const Title = styled.h1`
   font-size: 48px;
   line-height: 56px;
   color: #000000;
+  margin-bottom: 83px;
 `;
 
 const Wrapper = styled.div`
@@ -157,6 +202,10 @@ export const Item = styled.div`
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.08);
   border-radius: 20px;
   position: relative;
+  &:hover {
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+  }
+  margin-bottom: 30px;
   &:after,
   &:before {
     content: "";
@@ -174,8 +223,10 @@ export const Item = styled.div`
   &:before {
     transform: translateX(-50%) translateY(-84%) rotate(-45deg);
   }
+  cursor: pointer;
 `;
 export const Block = styled.div`
+  width: 467px;
   padding: 58px 40px 32px 40px;
   background: #f5f9ff;
   box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.08);

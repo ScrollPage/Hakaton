@@ -8,8 +8,16 @@ export const Strawberry = styled.div`
 `
 
 export const Wrapper = styled.div`
-  background-color: ${({ theme }) => theme.lightBlue};
   padding: 150px 0;
+  background-color: #000;
+  position: relative;
+  #tsparticles {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
   ${Strawberry} {
     &:last-of-type {
       transform: scale(-1, 1);
@@ -27,7 +35,7 @@ export const Title = styled.div`
   font-weight: normal;
   font-size: 70px;
   line-height: 140px;
-  color: #000000;
+  color: #fff;
 `;
 
 export const Inner = styled.div`
@@ -60,4 +68,5 @@ export const Text = styled.div`
   font-size: 24px;
   line-height: 40px;
   margin-bottom: 20px;
+  color: #fff;
 `;

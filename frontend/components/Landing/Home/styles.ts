@@ -25,6 +25,7 @@ export const Wrapper = styled.div`
     left: 0;
     top: 0;
     width: 100%;
+    z-index: 1 !important;
   }
   height: 100vh;
   background-color: #000;
