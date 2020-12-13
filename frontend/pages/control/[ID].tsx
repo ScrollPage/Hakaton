@@ -48,10 +48,6 @@ const ControlData = ({}: ControlDataProps) => {
     `/api/detector/${query.ID}?begin_date=${data[0]}&end_date=${data[1]}&currency=${currency}`
   );
 
-  // const { data: detectorData, error } = useSWR(
-  //   `/api/detector/${query.ID}?begin_date=${data[0]}&end_date=${data[1]}&currency=${currency}`
-  // );
-
   const indexChange = (value: IParam) => {
     setIndex(value);
   };

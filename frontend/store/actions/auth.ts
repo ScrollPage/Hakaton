@@ -70,7 +70,7 @@ export const authLogin = (email: string, password: string): ThunkType => async d
       dispatch(checkAuthTimeout(24 * 3600 * 1000));
       dispatch(authInfo());
 
-      Router.push({ pathname: '/info' }, undefined, { shallow: true });
+      Router.push({ pathname: '/secure' }, undefined, { shallow: true });
 
       dispatch(show('Вы успешно вошли!', 'success'));
     })
@@ -124,6 +124,9 @@ export const logout = (isRedirect: boolean): ThunkType => () => {
   Cookie.remove('firstName');
   Cookie.remove('lastName');
   Cookie.remove('email');
+  Cookie.remove('system');
+  Cookie.remove('date');
+  Cookie.remove('begin');
 };
 
 export const checkAuthTimeout = (expirationTime: number): ThunkType => dispatch =>

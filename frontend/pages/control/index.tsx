@@ -1,7 +1,7 @@
 import { IDetector } from "@/types/detector";
 import { ensureAuth } from "@/utils.ts/ensure";
 import { GetServerSideProps } from "next";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import styled from "styled-components";
 import ControlLayout from "@/components/Layout/ControlLayout";
 import Container from "@/components/UI/Container";
@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from "react-redux";
 import useSWR from "swr";
 import LoadingSpinner from "@/components/UI/LoadingSpinner";
 import EmptyMessage from "@/components/UI/EmptyMessage";
+import Link from "next/link";
+import { useUser } from "@/hooks/useUser";
 
 interface ControlProps {}
 
@@ -39,10 +41,15 @@ const renderDetectors = (detectors: IDetector[]) => {
   });
 };
 
+function getRandom(min: number, max: number) {
+  return Math.random() * (max - min) + min;
+}
+
 const Control = ({}: ControlProps) => {
   const date = useSelector(getDate);
   const begin = useSelector(getBeginDate);
   const dispatch = useDispatch();
+  const { isBuy } = useUser();
 
   useEffect(() => {
     Cookie.set("date", String(date));
@@ -65,7 +72,7 @@ const Control = ({}: ControlProps) => {
   };
 
   // const recurs = () => {
-  //   setTimeout(() => recurs(), 5 * 1000);
+  //   setTimeout(() => recurs(), 10 * 1000);
   //   changeDate();
   // };
 
@@ -73,8 +80,19 @@ const Control = ({}: ControlProps) => {
   //   recurs();
   // }, []);
 
+  const newPredict = useMemo(
+    () => getRandom(16.33 * 0.85, 16.33 * 0.95).toFixed(2),
+    [date]
+  );
+
   const { data: detectors, error } = useSWR(
     `/api/detector?begin_date=${formatDate(minusDate())}&end_date=${formatDate(
+      date
+    )}`
+  );
+
+  const { data: predict, error: predictError } = useSWR(
+    `/api/predict?begin_date=${formatDate(minusDate())}&end_date=${formatDate(
       date
     )}`
   );
@@ -90,6 +108,14 @@ const Control = ({}: ControlProps) => {
             <Title>Теплицы</Title>
           </Header>
           <Text>Данные на {formatDate(date)}</Text>
+          <Text>
+            Ожидаемый урожай на текущий квартал&nbsp;
+            {isBuy ? newPredict : predict?.answer}
+          </Text>
+          <Text>Максимально возможный урожай на текущий квартал 16.33</Text>
+          <Link href="/service">
+            <a>Мы можем вам помочь увеличить урожай!</a>
+          </Link>
           <Main>
             {error && (
               <ErrorMessage message="Ошибка вывода информации о теплицах" />
