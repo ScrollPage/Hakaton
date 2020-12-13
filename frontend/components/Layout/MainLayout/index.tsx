@@ -57,7 +57,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                   myType="orange"
                   small
                   onClick={() =>
-                    push({ pathname: "/control" }, undefined, {
+                    push({ pathname: "/secure" }, undefined, {
                       shallow: true,
                     })
                   }

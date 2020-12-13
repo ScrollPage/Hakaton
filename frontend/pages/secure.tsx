@@ -11,12 +11,14 @@ import { useDispatch } from "react-redux";
 import { modalShow } from "@/store/actions/modal";
 import { IChangeDataModalProps } from "@/components/Modal/ChangeDataModal";
 import { useUser } from "@/hooks/useUser";
+import { useRouter } from "next/router";
 
 interface SucureProps {}
 
 const Sucure = ({}: SucureProps) => {
   const dispatch = useDispatch();
   const { firstName, lastName, email } = useUser();
+  const { push } = useRouter();
 
   const showHandler = () => {
     dispatch(
@@ -74,7 +76,15 @@ const Sucure = ({}: SucureProps) => {
               <BuyText>
                 Покупка автоматической системы управления показателями почвы{" "}
               </BuyText>
-              <SButton myType="orange" small>
+              <SButton
+                myType="orange"
+                small
+                onClick={() =>
+                  push({ pathname: "/service" }, undefined, {
+                    shallow: true,
+                  })
+                }
+              >
                 Купить
               </SButton>
             </Buy>

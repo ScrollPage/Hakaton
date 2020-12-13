@@ -40,6 +40,21 @@ export const emailActivate = (token: string): ThunkType => async dispatch => {
     });
 };
 
+export const authBuy = (): ThunkType => async dispatch => {
+  const token = Cookie.get('token');
+  await instance(token)
+    .patch('/auth/users/me/', {
+      system: true,
+    })
+    .then(() => {
+      Cookie.set('system', String(true));
+      dispatch(show('Вы успешно купили услугу!', 'success'));
+    })
+    .catch(() => {
+      dispatch(show('Ошибка покупки услуги!', 'warning'));
+    });
+};
+
 export const authLogin = (email: string, password: string): ThunkType => async dispatch => {
   await instanceWithOutHeaders
     .post('/auth/jwt/create/', {
@@ -55,7 +70,7 @@ export const authLogin = (email: string, password: string): ThunkType => async d
       dispatch(checkAuthTimeout(24 * 3600 * 1000));
       dispatch(authInfo());
 
-      Router.push({ pathname: '/info' }, undefined, { shallow: true });
+      Router.push({ pathname: '/secure' }, undefined, { shallow: true });
 
       dispatch(show('Вы успешно вошли!', 'success'));
     })
@@ -72,6 +87,7 @@ export const authInfo = (): ThunkType => async dispatch => {
       Cookie.set('firstName', res.data.first_name);
       Cookie.set('lastName', res.data.last_name);
       Cookie.set('email', res.data.email);
+      Cookie.set('system', res.data.system);
 
       console.log('Информация успешно занесена в куки');
     })
@@ -108,6 +124,9 @@ export const logout = (isRedirect: boolean): ThunkType => () => {
   Cookie.remove('firstName');
   Cookie.remove('lastName');
   Cookie.remove('email');
+  Cookie.remove('system');
+  Cookie.remove('date');
+  Cookie.remove('begin');
 };
 
 export const checkAuthTimeout = (expirationTime: number): ThunkType => dispatch =>

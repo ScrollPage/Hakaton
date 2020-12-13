@@ -28,9 +28,9 @@ export const Info = styled.div`
   left: -50px;
   display: flex;
 `
-export const Circle = styled.div<{ index: number, isGood: boolean }>`
+export const Circle = styled.div<{ index: number, good: string }>`
   position: absolute;
-  background: ${({ theme, isGood }) => isGood ? theme.green : theme.red};
+  background: ${({ good }) => good};
   height: 10px;
   width: 10px;
   border-radius: 100%;

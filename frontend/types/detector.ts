@@ -10,9 +10,9 @@ export interface IDetectorData {
 
 export interface IDetector {
   id: number;
-  good_lightning: boolean;
-  good_temp: boolean;
-  good_humidity: boolean;
-  good_pH: boolean;
+  good_lightning: number;
+  good_temp: number;
+  good_humidity: number;
+  good_pH: number;
 }
 
