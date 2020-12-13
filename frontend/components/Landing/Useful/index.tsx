@@ -1,4 +1,5 @@
 import Container from "@/components/UI/Container";
+import { MyPartic } from "@/components/UI/MyPartic";
 import Image from "next/image";
 import React from "react";
 import {
@@ -15,6 +16,7 @@ import {
 export const UseFul = () => {
   return (
     <Wrapper>
+      <MyPartic />
       <Container>
         <Inner>
           <Main>

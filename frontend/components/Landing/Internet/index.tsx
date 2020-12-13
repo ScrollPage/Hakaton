@@ -1,4 +1,5 @@
 import Container from "@/components/UI/Container";
+import { MyPartic } from "@/components/UI/MyPartic";
 import Image from "next/image";
 import React from "react";
 import { Wrapper, Title, Inner, Box } from "./styles";
@@ -6,6 +7,7 @@ import { Wrapper, Title, Inner, Box } from "./styles";
 export const Internet = () => {
   return (
     <Wrapper>
+      <MyPartic />
       <Container>
         <Inner>
           <Title>Нашим сервисом легко пользоваться</Title>

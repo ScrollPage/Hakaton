@@ -3,17 +3,26 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   padding: 166px 0;
   background-color: #000;
+  position: relative;
+  #tsparticles {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
 `;
 export const Inner = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const Block = styled.div`
+export const Block = styled.div<{ ismar?: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  ${({ ismar }) => ismar && 'margin-left: 80px;'}
 `
 
 export const Subtitle = styled.h2`

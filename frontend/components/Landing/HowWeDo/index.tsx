@@ -23,7 +23,7 @@ export const HowWeDo = () => {
         </Inner>
       </Container>
       <MyImage>
-        <Image src="/main/club_bgc_2.png" height={780} width={644} />
+        <Image src="/main/loon.png" height={1100} width={1000} />
       </MyImage>
       <Strawberry>
         <Image src="/main/club.png" height={192} width={192} />

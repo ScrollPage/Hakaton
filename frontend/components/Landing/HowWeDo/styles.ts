@@ -21,6 +21,7 @@ export const Wrapper = styled.div`
       transform: scale(-1, 1)
     }
   }
+  background-color: #000;
   #tsparticles {
     height: 100vh;
     position: absolute;
@@ -31,16 +32,18 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.div`
+  color: #fff; 
   font-family: "Rosalinda";
   font-style: normal;
   font-weight: normal;
   font-size: 70px;
   line-height: 140px;
-  color: #000000;
+  color: #fff;
   margin-bottom: 100px;
 `;
 
 export const Text = styled.div`
+  color: #fff;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 300;
@@ -60,7 +63,7 @@ export const Inner = styled.div`
 
 export const MyImage = styled.div`
   position: absolute;
-  bottom: -140px;
+  bottom: -170px;
   left: -90px;
   z-index: 1;
 `;

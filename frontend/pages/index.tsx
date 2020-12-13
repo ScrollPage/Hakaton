@@ -11,6 +11,7 @@ import styled from "styled-components";
 
 import Image from "next/image";
 import Container from "@/components/UI/Container";
+import { MyPartic } from "@/components/UI/MyPartic";
 
 export default function Index() {
   return (
@@ -23,6 +24,7 @@ export default function Index() {
       <Internet />
       <UseFul />
       <Block>
+        <MyPartic />
         <Container>
           <Title>Как это работает?</Title>
           <Items>
@@ -46,6 +48,7 @@ export default function Index() {
         </Container>
       </Block>
       <Block>
+        <MyPartic />
         <Title>Но это еще не все!</Title>
         <Text>
           Вы сможете полностью автоматизировать корректировку климата ваших
@@ -95,4 +98,12 @@ const Title = styled.div`
 const Block = styled.div`
   padding: 200px 0;
   background-color: #000;
+  position: relative;
+  #tsparticles {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
 `;
