@@ -34,7 +34,7 @@ const ControlLayout: React.FC<ControlLayoutProps> = ({ children }) => {
     <>
       <Header>
         <Nav>
-          <Title>Теплицы</Title>
+          {pathname === "/control" && <Title>Теплицы</Title>}
           <NavContainer>
             <Link href="/">
               <a>
