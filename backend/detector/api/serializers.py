@@ -4,10 +4,10 @@ from detector.models import Detector, DetectorData
 
 class DetectorSerializer(serializers.ModelSerializer):
     '''Сериалазация датчиков'''
-    good_pH = serializers.IntegerField()
-    good_lightning = serializers.IntegerField()
-    good_humidity = serializers.IntegerField()
-    good_temp = serializers.IntegerField()
+    good_pH = serializers.IntegerField(default=7)
+    good_lightning = serializers.IntegerField(default=7)
+    good_humidity = serializers.IntegerField(default=7)
+    good_temp = serializers.IntegerField(default=7)
 
     class Meta:
         model = Detector
