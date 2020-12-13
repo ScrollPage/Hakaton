@@ -2,6 +2,7 @@ import { IDetectorData } from "@/types/detector";
 import React from "react";
 import { Wrapper, Title } from "./styles";
 import { Line } from "react-chartjs-2";
+import { useUser } from "@/hooks/useUser";
 
 type IParam = "temp" | "humidity" | "lightning" | "pH";
 
@@ -25,19 +26,28 @@ const renderIdeal = (param: IParam) => {
 };
 
 export const Chart: React.FC<ChartProps> = ({ detectorData, param, label }) => {
+  const { isBuy } = useUser();
+
+  const renderIndex = () => {
+    if (isBuy) {
+      return Array.from(
+        { length: detectorData.length },
+        () =>
+          Math.random() *
+            (renderIdeal(param) * 1.05 - renderIdeal(param) * 0.95) +
+          renderIdeal(param) * 0.95
+      );
+    } else {
+      return detectorData.map((item) => item?.[param]);
+    }
+  };
+
   const data = {
     labels: detectorData.map((item) => item.min_timestamp.slice(0, -9)),
     datasets: [
       {
         label,
-        data: detectorData.map((item) => item?.[param]),
-        // data: Array.from(
-        //   { length: detectorData.length },
-        //   () =>
-        //     Math.random() *
-        //       (renderIdeal(param) * 1.05 - renderIdeal(param) * 0.95) +
-        //     renderIdeal(param) * 0.95
-        // ),
+        data: renderIndex(),
         borderColor: "#E86900",
         backgroundColor: "transparent",
         fill: false,

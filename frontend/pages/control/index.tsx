@@ -65,7 +65,7 @@ const Control = ({}: ControlProps) => {
   };
 
   // const recurs = () => {
-  //   setTimeout(() => recurs(), 1 * 1000);
+  //   setTimeout(() => recurs(), 5 * 1000);
   //   changeDate();
   // };
 
