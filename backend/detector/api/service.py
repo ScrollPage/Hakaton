@@ -94,15 +94,55 @@ def send_report_email(user_email, date1, date2, content):
     email.attach_alternative(html_content, 'text/html')
     email.send()
 
-def make_content(data, fl):
+def make_content(data, begin_date, end_date, fl):
     if fl:
         content = ''
         for det in data:
-            content += f'Отчет из теплицы №{det.id}'
-            content += f'Данные по показателю кислотности: {100*round(det.good_pH/7, 2)}% данных попали в диапазон лучших значений!'
-            content += f'Данные по показателю влажности: {100*round(det.good_humidity/7, 2)}% данных попали в диапазон лучших значений!'
-            content += f'Данные по показателю освещение: {100*round(det.good_lightning/7, 2)}% данных попали в диапазон лучших значений!'
-            content += f'Данные по показателю температура: {100*round(det.good_pH/7, 2)}% данных попали в диапазон лучших значений!'
+            content += f'Отчет из теплицы №{det.id}\n'
+            ph_perc = round(100*det.good_pH/7, 2)
+            content += f'Данные по показателю кислотности: {ph_perc}% данных попали в диапазон лучших значений!\n'
+            humidity_perc = round(100*det.good_humidity/7, 2)
+            content += f'Данные по показателю влажности: {humidity_perc}% данных попали в диапазон лучших значений!\n'
+            lightning_perc = round(100*det.good_lightning/7, 2)
+            content += f'Данные по показателю освещение: {lightning_perc}% данных попали в диапазон лучших значений!\n'
+            temp_perc = round(100*det.good_pH/7, 2)
+            content += f'Данные по показателю температура: {temp_perc}% данных попали в диапазон лучших значений!\n\n'
+            content += 'Рекомендации:\n'
+            avg = det.data.filter(timestamp__gte=begin_date, timestamp__lt=end_date) \
+                .aggregate(Avg('pH'), Avg('humidity'), Avg('lightning'), Avg('temp'))
+            if avg['pH__avg'] is not None:
+                if ph_perc < 85:
+                    if float(avg['pH__avg']) < settings.NORMAL_PH:
+                        content += f"Ваша кислотность: {round(float(avg['pH__avg']), 2)}, оптимальная кислотность: {settings.NORMAL_PH}. Внесите удобрения!\n"
+                    else:
+                        content += f"Ваша кислотность: {round(float(avg['pH__avg']), 2)}, оптимальная кислотность: {settings.NORMAL_PH}. Снизьте pH. К примеру, внесите известянковой муки!\n"
+            else:
+                content += "Почините ваш датчик! Он не передает значения!\n"
+            if avg['humidity__avg'] is not None:
+                if humidity_perc < 85:
+                    if float(avg['humidity__avg']) < settings.NORMAL_LIGHTNING:
+                        content += f"Ваша влажность: {round(float(avg['humidity__avg']), 2)}, оптимальная влажность: {settings.NORMAL_HUMIDITY}. Полейте Вашу почву!\n"
+                    else:
+                        content += f"Ваша влажность: {round(float(avg['humidity__avg']), 2)}, оптимальная влажность: {settings.NORMAL_HUMIDITY}. Необходимо снизить влажность почвы!.\n"
+            else:
+                content += "Почините ваш датчик! Он не передает значения!\n"
+            if avg['lightning__avg'] is not None:
+                if lightning_perc < 85:
+                    if float(avg['lightning__avg']) < settings.NORMAL_LIGHTNING:
+                        content += f"Ваша освещенность: {round(float(avg['lightning__avg']), 2)}, оптимальная освещенность: {settings.NORMAL_LIGHTNING}. Клубнике требуется больше света!\n"
+                    else:
+                        content += f"Ваша освещенность: {round(float(avg['lightning__avg']), 2)}, оптимальная освещенность: {settings.NORMAL_LIGHTNING}. Снизьте освещенность!\n"
+            else:
+                content += "Почините ваш датчик! Он не передает значения!\n"
+            if avg['temp__avg'] is not None:
+                if temp_perc < 85:
+                    if float(avg['temp__avg']) < settings.NORMAL_TEMP:
+                        content += f"Ваша температура: {round(float(avg['temp__avg']), 2)}, оптимальная температура: {settings.NORMAL_TEMP}. Повысьте температуру!\n"
+                    else:
+                        content += f"Ваша температура: {round(float(avg['temp__avg']), 2)}, оптимальная температура: {settings.NORMAL_TEMP}. Снизьте температуру!\n"
+            else:
+                content += "Почините ваш датчик! Он не передает значения!\n"
+            content += '\n\n'
     else:
         content = 'С Вашими теплицами все в полном порядке!\n Мы поддерживаем Ваши данные в пределах нормы.'
     return content
