@@ -32,15 +32,17 @@ If you want to run by runserver:
 2) You need to have your Docker installed
 ```bash
 3) python -m pip install –upgrade pip
-4) pip install vurtual env
-5) env\Scripts\activate.bat
-6) pip install -r req.txt
-7) python manage.py upload_data sensor_daat.csv
-8) python manage.py regress
-9) celery -A backend worker --pool=solo -l info
-10) docker run -d -p 6379:6379 redis
-11) docker run -d --name=<name> -p 5432:5432 -e POSTGRES_PASSWORD=<password> -e PGDATA=/pgdata -v /pgdata:/pgdata postgres
-12) python manage.py runserver
+4) pip install virtualenv
+5) python -m venv env
+6) env\Scripts\activate.bat (Fow windows)
+6) source ./env/bin/activate (For Linux)
+7) pip install -r req.txt
+8) python manage.py upload_data sensor_daat.csv
+9) python manage.py regress
+10) celery -A backend worker --pool=solo -l info
+11) docker run -d -p 6379:6379 redis
+12) docker run -d --name=<name> -p 5432:5432 -e POSTGRES_PASSWORD=<password> -e PGDATA=/pgdata -v /pgdata:/pgdata postgres
+13) python manage.py runserver
 ```
 Do not forget to specify your PostgreSQL password in backend.settings!
 
