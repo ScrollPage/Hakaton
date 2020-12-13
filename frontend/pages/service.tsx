@@ -1,13 +1,17 @@
 import { ensureAuth } from "@/utils.ts/ensure";
 import { GetServerSideProps } from "next";
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Container from "@/components/UI/Container";
 import Head from "next/head";
 import ControlLayout from "@/components/Layout/ControlLayout";
 import { SButton } from "@/components/UI/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useUser } from "@/hooks/useUser";
+import { modalShow } from "@/store/actions/modal";
+import { IBuyServiceModalProps } from "@/components/Modal/BuyServiceModal";
+import { getSubsrc } from "@/store/selectors";
+import Cookie from "js-cookie";
 
 interface ServiceProps {}
 
@@ -15,7 +19,19 @@ const Service = ({}: ServiceProps) => {
   const dispatch = useDispatch();
   const { isBuy } = useUser();
 
-  console.log(isBuy);
+  const showHandler = () => {
+    dispatch(modalShow<IBuyServiceModalProps>("BUY_SERVICE_MODAL", {}));
+  };
+
+  const subsrc = useSelector(getSubsrc);
+  useEffect(() => {
+    // if (!subsrc) {
+    //   Cookie.remove("subsrc");
+    // } else {
+    //   Cookie.set("subsrc", new Date(subsrc as any));
+    // }
+    console.log(subsrc);
+  }, [subsrc]);
 
   return (
     <ControlLayout>
@@ -55,7 +71,9 @@ const Service = ({}: ServiceProps) => {
                     удобрений.
                   </Text>
                   <SubSubtitle>- Контроль из любой точки Вселенной</SubSubtitle>
-                  <SButton myType="orange">Оформить подписку</SButton>
+                  <SButton onClick={showHandler} myType="orange">
+                    Оформить подписку
+                  </SButton>
                 </>
               )}
             </Block>

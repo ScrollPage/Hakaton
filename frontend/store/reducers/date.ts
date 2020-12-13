@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie';
 import { PropertiesType } from '@/types/action';
-import * as actions from './../actions/date';
+import { actions } from './../actions/date';
 
 const patch = [
   "2052-01-01",
@@ -21,6 +21,7 @@ const patch = [
 const initialState = {
   date: Cookie.get('date') === undefined ? new Date("2052-01-02") : new Date(Cookie.get('date') as any),
   begin: Cookie.get('begin') === undefined ? new Date("2052-01-01") : new Date(Cookie.get('begin') as any),
+  subsrc: Cookie.get('subsrc') === undefined ? undefined : new Date(Cookie.get('subsrc') as any),
 };
 
 type InititalStateType = typeof initialState;
@@ -40,6 +41,17 @@ export const dateReducer = (state = initialState, action: DateActionsTypes): Ini
           }
         })
         return { ...state, date: newDate, begin }
+      }
+    case 'SET_SUBSCR':
+      {
+        let newSubscr = new Date(state.date) as any;
+        if (!action.days) {
+          newSubscr = undefined;
+        } else {
+          newSubscr.setDate(newSubscr.getDate() + action.days);
+          Cookie.set('subsrc', newSubscr);
+        }
+        return { ...state, subsrc: newSubscr }
       }
     default:
       return state;

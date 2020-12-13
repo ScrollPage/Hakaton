@@ -3,13 +3,14 @@ import { ThunkType } from '@/types/thunk';
 import Cookie from 'js-cookie';
 import { show } from './alert';
 import Router from 'next/router';
+import { trigger } from 'swr';
 
 export const authSignup = (
   email: string,
   firstName: string,
   lastName: string,
   password: string,
-): ThunkType => async dispatch => {
+): ThunkType => async (dispatch: any) => {
   await instanceWithOutHeaders
     .post('/auth/users/ ', {
       email,
@@ -27,7 +28,7 @@ export const authSignup = (
     });
 };
 
-export const emailActivate = (token: string): ThunkType => async dispatch => {
+export const emailActivate = (token: string): ThunkType => async (dispatch: any) => {
   await instanceWithOutHeaders
     .post('/api/activate/', {
       token,
@@ -40,22 +41,27 @@ export const emailActivate = (token: string): ThunkType => async dispatch => {
     });
 };
 
-export const authBuy = (): ThunkType => async dispatch => {
+export const authBuy = (bool: boolean): ThunkType => async (dispatch: any) => {
   const token = Cookie.get('token');
   await instance(token)
     .patch('/auth/users/me/', {
-      system: true,
+      system: bool,
     })
     .then(() => {
-      Cookie.set('system', String(true));
-      dispatch(show('Вы успешно купили услугу!', 'success'));
+      Cookie.set('system', String(bool));
+      dispatch(show(bool ? 'Вы успешно купили услугу!' : 'У вас закончилась подписка', 'success'));
+      if (!bool) {
+        Router.push({ pathname: '/control' }, undefined, { shallow: true });
+      }
+      trigger('/api/detector/');
+      trigger('/api/detector');
     })
     .catch(() => {
-      dispatch(show('Ошибка покупки услуги!', 'warning'));
+      dispatch(show(bool ? 'Ошибка покупки услуги!' : "Ошибка отмены подписки", 'warning'));
     });
 };
 
-export const authLogin = (email: string, password: string): ThunkType => async dispatch => {
+export const authLogin = (email: string, password: string): ThunkType => async (dispatch: any) => {
   await instanceWithOutHeaders
     .post('/auth/jwt/create/', {
       email,
@@ -79,7 +85,7 @@ export const authLogin = (email: string, password: string): ThunkType => async d
     });
 };
 
-export const authInfo = (): ThunkType => async dispatch => {
+export const authInfo = (): ThunkType => async (dispatch: any) => {
   const token = Cookie.get('token');
   await instance(token)
     .get('/auth/users/me/')
@@ -96,7 +102,7 @@ export const authInfo = (): ThunkType => async dispatch => {
     });
 };
 
-export const authInfoChange = (firstName: string, lastName: string): ThunkType => async dispatch => {
+export const authInfoChange = (firstName: string, lastName: string): ThunkType => async (dispatch: any) => {
   const token = Cookie.get('token');
   await instance(token)
     .put('/auth/users/me/', {
@@ -129,10 +135,10 @@ export const logout = (isRedirect: boolean): ThunkType => () => {
   Cookie.remove('begin');
 };
 
-export const checkAuthTimeout = (expirationTime: number): ThunkType => dispatch =>
+export const checkAuthTimeout = (expirationTime: number): ThunkType => (dispatch: any) =>
   setTimeout(() => dispatch(logout(false)), expirationTime);
 
-export const authCheckState = (): ThunkType => dispatch => {
+export const authCheckState = (): ThunkType => (dispatch: any) => {
   const token = Cookie.get('token');
 
   if (token === undefined) {
