@@ -147,11 +147,13 @@ AUTH_USER_MODEL = 'client.Client'
 CORS_ORIGIN_WHITELIST = (
     u'http://127.0.0.1:3000',
     u'http://localhost:3000',
-    u'https://185.114.247.197',
+    u'https://130.193.48.20:3000',
     u'https://mars-berry.ru',
-    u'http://185.114.247.197',
+    u'http://130.193.48.20:3000',
     u'http://mars-berry.ru'
 )
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
