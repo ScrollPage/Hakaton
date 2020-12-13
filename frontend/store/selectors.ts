@@ -16,6 +16,10 @@ export const getBeginDate = (state: AppStateType) => {
   return state.date.begin
 }
 
+export const getSubsrc = (state: AppStateType) => {
+  return state.date.subsrc
+}
+
 export const getAlertIsNotClose = (state: AppStateType) => {
   return state.alert.IsNotClose
 }

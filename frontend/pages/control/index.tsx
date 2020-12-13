@@ -9,8 +9,8 @@ import Head from "next/head";
 import ErrorMessage from "@/components/UI/ErrorMessage";
 import { Detector } from "@/components/Detector";
 import { show } from "@/store/actions/alert";
-import { getDate, getBeginDate } from "@/store/selectors";
-import { nextDate } from "@/store/actions/date";
+import { getDate, getBeginDate, getSubsrc } from "@/store/selectors";
+import { newNextDate } from "@/store/actions/date";
 import Cookie from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import useSWR from "swr";
@@ -60,7 +60,7 @@ const Control = ({}: ControlProps) => {
     if (date === new Date("2054-12-31")) {
       dispatch(show("Конец демо версии", "warning"));
     } else {
-      dispatch(nextDate());
+      dispatch(newNextDate());
       dispatch(show("Наступил новый день", "success"));
     }
   };
@@ -71,14 +71,14 @@ const Control = ({}: ControlProps) => {
     return newDate;
   };
 
-  // const recurs = () => {
-  //   setTimeout(() => recurs(), 10 * 1000);
-  //   changeDate();
-  // };
+  const recurs = () => {
+    setTimeout(() => recurs(), 6 * 1000);
+    changeDate();
+  };
 
-  // useEffect(() => {
-  //   recurs();
-  // }, []);
+  useEffect(() => {
+    recurs();
+  }, []);
 
   const newPredict = useMemo(
     () => getRandom(16.33 * 0.85, 16.33 * 0.95).toFixed(2),
