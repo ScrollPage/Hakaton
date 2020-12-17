@@ -40,6 +40,7 @@ export const dateReducer = (state = initialState, action: DateActionsTypes): Ini
             begin = new Date(item);
           }
         })
+        console.log(newDate);
         return { ...state, date: newDate, begin }
       }
     case 'SET_SUBSCR':

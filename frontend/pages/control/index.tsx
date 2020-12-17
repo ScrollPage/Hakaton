@@ -62,7 +62,6 @@ const Control = ({}: ControlProps) => {
       dispatch(show("Конец демо версии", "warning"));
     } else {
       dispatch(newNextDate());
-      dispatch(show("Наступил новый день", "success"));
     }
   };
 
@@ -73,13 +72,13 @@ const Control = ({}: ControlProps) => {
   };
 
   const recurs = () => {
-    setTimeout(() => recurs(), 10 * 1000);
+    setTimeout(() => recurs(), 20 * 1000);
     changeDate();
   };
 
-  // useEffect(() => {
-  //   recurs();
-  // }, []);
+  useEffect(() => {
+    recurs();
+  }, []);
 
   const newPredict = useMemo(
     () => getRandom(16.33 * 0.85, 16.33 * 0.95).toFixed(2),

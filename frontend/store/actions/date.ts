@@ -13,7 +13,7 @@ export const setSubsrc = (days?: number) => ({ type: 'SET_SUBSCR', days: days } 
 
 export const newNextDate = (): ThunkType => async (dispatch: any, getState) => {
   const state = getState();
-  dispatch(actions.nextDate);
+  dispatch(actions.nextDate());
   if (state.date.subsrc) {
     let newDate = new Date(state.date.date);
     if (newDate > state.date.subsrc) {
