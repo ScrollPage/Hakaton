@@ -33,11 +33,12 @@ export const Detector: React.FC<{ detector: IDetector }> = ({ detector }) => {
 
   return (
     <Wrapper>
-      {/* <Link href={`/control/${detector.id}`}>
-        <a>Данные</a>
-      </Link> */}
       <MyImage>
-        <Image src="/main/detector.png" height={400} width={500} />
+        <Link href={`/control/${detector.id}`}>
+          <a>
+            <Image src="/main/detector.png" height={400} width={500} />
+          </a>
+        </Link>
       </MyImage>
       <Info>
         <Box

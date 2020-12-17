@@ -1,7 +1,9 @@
 import React from "react";
 import Particles from "react-particles-js";
 
-export const MyPartic = () => {
+export const MyPartic: React.FC<{ active?: boolean }> = ({
+  active = false,
+}) => {
   return (
     <Particles
       params={{
@@ -19,14 +21,14 @@ export const MyPartic = () => {
           opacity: {
             value: 0.8,
             anim: {
-              enable: true,
+              enable: active,
             },
           },
           size: {
             value: 2,
             random: true,
             anim: {
-              enable: true,
+              enable: active,
               speed: 6,
             },
           },
@@ -34,14 +36,14 @@ export const MyPartic = () => {
             enable: false,
           },
           move: {
-            speed: 0.2,
+            speed: active ? 0.2 : 0,
           },
         },
         interactivity: {
           detect_on: "canvas",
           events: {
             onhover: {
-              enable: true,
+              enable: false,
               mode: "bubble",
             },
           },

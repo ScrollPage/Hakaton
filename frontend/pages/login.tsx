@@ -18,7 +18,7 @@ const Login = ({}: LoginProps) => {
         <Head>
           <title>Вход</title>
         </Head>
-        <MyPartic />
+        <MyPartic active={true} />
         <Container>
           <Inner>
             <Title>Войти в аккаунт</Title>

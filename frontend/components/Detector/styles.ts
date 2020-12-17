@@ -77,6 +77,10 @@ export const MyImage = styled.div`
   position: absolute;
   height: 400px;
   width: 500px;
+  transition: all 0.2s ease;
+  &:hover {
+    transform: scale(1.15);
+  }
 `
 
 export const Wrapper = styled.div`

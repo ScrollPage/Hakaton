@@ -41,7 +41,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <SWRConfig
           value={{
             revalidateOnMount: true,
-            revalidateOnFocus: true,
+            // revalidateOnFocus: true,
             dedupingInterval: 5000,
             fetcher: (url) =>
               axios({

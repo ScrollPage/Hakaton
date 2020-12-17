@@ -21,7 +21,7 @@ const Register = ({}: RegisterProps) => {
         <Head>
           <title>Регистрация</title>
         </Head>
-        <MyPartic />
+        <MyPartic active={true} />
         <Container>
           <Stepper step={formStep} />
           <Inner>
