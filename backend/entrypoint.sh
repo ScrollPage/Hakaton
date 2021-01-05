@@ -12,4 +12,8 @@ then
     echo "Postgres started"
 fi
 
+python manage.py collectstatic
+python manage.py upload_data sensor_data.csv
+python manage.py regres
+
 exec "$@"

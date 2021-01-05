@@ -50,26 +50,26 @@ class Command(BaseCommand):
         reg, _ = Regressor.objects.get_or_create(id=1)
         reg.model = clf
         reg.save()
-        # res, pH_linspace, humidity_linspace, lightning_linspace, temp_linspace = data_to_arr(get_all_mean())
-        # maxi = 0
-        # best = 0
-        # i = 0
-        # for pH in pH_linspace:
-        #     res[0] = pH
-        #     for humidity in humidity_linspace:
-        #         res[1] = humidity
-        #         for lightning in lightning_linspace:
-        #             res[2] = lightning
-        #             for temp in temp_linspace:
-        #                 res[3] = temp
-        #                 res_without_extra = copy.copy(res)
-        #                 res_without_extra.append(np.var(res_without_extra))
-        #                 pred = clf.predict(np.array(res_without_extra).reshape(1, -1))
-        #                 i += 1
-        #                 print(i)
-        #                 if maxi < pred:
-        #                     maxi = pred
-        #                     best = res_without_extra
+        res, pH_linspace, humidity_linspace, lightning_linspace, temp_linspace = data_to_arr(get_all_mean())
+        maxi = 0
+        best = 0
+        i = 0
+        for pH in pH_linspace:
+            res[0] = pH
+            for humidity in humidity_linspace:
+                res[1] = humidity
+                for lightning in lightning_linspace:
+                    res[2] = lightning
+                    for temp in temp_linspace:
+                        res[3] = temp
+                        res_without_extra = copy.copy(res)
+                        res_without_extra.append(np.var(res_without_extra))
+                        pred = clf.predict(np.array(res_without_extra).reshape(1, -1))
+                        i += 1
+                        print(i)
+                        if maxi < pred:
+                            maxi = pred
+                            best = res_without_extra
 
-        # print(best)
-        # print(maxi)
+        print(best)
+        print(maxi)
