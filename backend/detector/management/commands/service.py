@@ -51,8 +51,8 @@ def get_all_mean():
 
 def data_to_arr(data_dict):
     res = [round(float(value), 3) for value in data_dict.values()]
-    pH_linspace = np.linspace(5.530*1.2, 8.520*0.8, 60)
-    humidity_linspace = np.linspace(12.110*1.2, 102.380*0.8, 60)
-    lightning_linspace = np.linspace(-3.610*0.8, 107.490*0.8, 60)
-    temp_linspace = np.linspace(-19.90*0.8, 41.500*0.8, 60)
+    pH_linspace = np.linspace(5.530*1.2, 8.520*0.8, 20)
+    humidity_linspace = np.linspace(12.110*1.2, 102.380*0.8, 20)
+    lightning_linspace = np.linspace(-3.610*0.8, 107.490*0.8, 20)
+    temp_linspace = np.linspace(-19.90*0.8, 41.500*0.8, 20)
     return res, pH_linspace, humidity_linspace, lightning_linspace, temp_linspace
