@@ -44,16 +44,21 @@ class Command(BaseCommand):
         X = np.array(X)
         X = X_to_values(X)
         X_train, y_train = X, y
-        clf = GradientBoostingRegressor(loss='ls', verbose=True, random_state=241, n_estimators=250, learning_rate=0.1)
+        clf = GradientBoostingRegressor(
+            loss='ls', verbose=True, random_state=241, 
+            n_estimators=250, learning_rate=0.1
+        )
         clf.fit(X_train, y_train)
         pred = clf.predict(X_train)
         reg, _ = Regressor.objects.get_or_create(id=1)
         reg.model = clf
         reg.save()
-        res, pH_linspace, humidity_linspace, lightning_linspace, temp_linspace = data_to_arr(get_all_mean())
+
+        
+        res, pH_linspace, humidity_linspace, lightning_linspace, temp_linspace \
+            = data_to_arr(get_all_mean())
         maxi = 0
         best = 0
-        i = 0
         for pH in pH_linspace:
             res[0] = pH
             for humidity in humidity_linspace:
@@ -64,12 +69,9 @@ class Command(BaseCommand):
                         res[3] = temp
                         res_without_extra = copy.copy(res)
                         res_without_extra.append(np.var(res_without_extra))
-                        pred = clf.predict(np.array(res_without_extra).reshape(1, -1))
-                        i += 1
-                        print(i)
+                        pred = clf.predict(
+                            np.array(res_without_extra).reshape(1, -1)
+                        )
                         if maxi < pred:
                             maxi = pred
                             best = res_without_extra
-
-        print(best)
-        print(maxi)

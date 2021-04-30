@@ -28,14 +28,14 @@ class DetectorData(models.Model):
         on_delete=models.DO_NOTHING, 
         related_name='data'
     )
-    temp = models.DecimalField('Первая температура', max_digits=6, decimal_places=3, null=True)
+    temp = models.DecimalField('Температура', max_digits=6, decimal_places=3, null=True)
     humidity = models.DecimalField('Влажность', max_digits=6, decimal_places=3, null=True)
     lightning = models.DecimalField('Освещенность', max_digits=6, decimal_places=3, null=True)
     pH = models.DecimalField('Кислотность', max_digits=6, decimal_places=3, null=True)
     timestamp = models.DateTimeField('Дата сбора данных')
 
     def __str__(self):
-        return f'Отчет в {self.timestamp} от {self.detector}'
+        return f'Отчет в {} от {}'.format(self.timestamp, self.detector)
 
     class Meta:
         verbose_name = 'Данные датчика'
